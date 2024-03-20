@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
+
 export class LoginComponent {
   email: string = ""
   password: string = ""
@@ -14,6 +15,8 @@ export class LoginComponent {
   authenticate( email: string,password: string){
     this.email = email
     this.password = password
+    console.log(email);
+    console.log(password);
     this.router.navigate(['/dash']);
   }
 
