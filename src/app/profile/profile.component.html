@@ -3,15 +3,15 @@
       <div class="col-md-8">
         <div class="card">
           <div class="card-header">
-            <h1 class="card-title">Welcome to the Dashboard</h1>
+            <h1 class="card-title">Profile</h1>
           </div>
           <div class="card-body">
             <div class="row">
               <div class="col-md-6">
                 <div class="actions">
                   <h2>Actions</h2>
-                  <button class="btn" (click)="toProfile()">View Profile</button>
-                  <button class="btn btn-danger" (click)="logout()">Logout</button>
+                  <button (click)="toDashboard()">Dashboard</button>
+                  <button class="btn btn-primary" (click)="editProfile()">Edit Profile</button>
                 </div>
               </div>
             </div>
@@ -20,4 +20,3 @@
       </div>
     </div>
   </div>
-  

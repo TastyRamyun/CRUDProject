@@ -1,0 +1,8 @@
+<header>Login please.</header>
+<span>
+  Email: <input type="email" id="email" placeholder="Enter Email" #email>
+  <br>
+  Password: <input type="password" id="password" placeholder="Enter Password" #password>
+</span>
+<br>
+<button (click)="authenticate(email.value,password.value)">Confirm</button>

@@ -8,11 +8,12 @@ import { Router } from '@angular/router';
 })
 export class AppComponent {
   title = 'ngCRUDMaster';
-
-  constructor(private router: Router){}
-
-  goToDash(){
-    console.log("Button clicked");
-    this.router.navigate(['/dash']);
+  constructor(private router: Router){
+    this.router.navigate(['/login'])
   }
+
+  // toLogin(){
+  //   this.router.navigate(['/login'])
+  // }
+
 }
