@@ -61,7 +61,7 @@
 <body>
   <div class="login-container">
     <h2>Login</h2>
-    <form action="#">
+    <form (submit)="onSubmit(email.value,password.value)">
       <div class="form-group">
         <label for="email">Email:</label>
         <input type="email" id="email" required #email>
@@ -71,9 +71,12 @@
         <input type="password" id="password"required #password>
       </div>
       <div class="form-group">
-        <button (click)="authenticate(email.value,password.value)">Login</button>
+        <button type="submit">Login</button>
       </div>
     </form>
+    <div *ngIf="invalidLogin" class="error-message">
+      Invalid email or password. Please try again.
+    </div>
   </div>
 </body>
 

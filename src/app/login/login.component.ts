@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { UserService } from '../user.service';
+import { User } from '../user.model';
 
 @Component({
   selector: 'app-login',
@@ -8,16 +10,23 @@ import { Router } from '@angular/router';
 })
 
 export class LoginComponent {
-  email: string = ""
-  password: string = ""
-  constructor(private router: Router){}
+  invalidLogin: boolean = false;
 
-  authenticate( email: string,password: string){
-    this.email = email
-    this.password = password
-    console.log(email);
-    console.log(password);
-    this.router.navigate(['/dash']);
+  constructor(private router: Router,private userService: UserService){
+
+  }
+
+  onSubmit(email: string, password: string) {
+    const user: User | undefined = this.userService.getUserByEmail(email);
+    if (user) {
+      console.log(user)
+      this.invalidLogin = false;
+      this.router.navigate(['/dash']);
+      this.userService.setCurrUser(email);
+    } else {
+      console.log('User not found!');
+      this.invalidLogin = true;
+    }
   }
 
 }
