@@ -1,7 +1,5 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { User } from './models/user.model';
-import { Router } from '@angular/router';
 import { Observable, Subscription, of } from 'rxjs';
 
 @Injectable({
@@ -23,7 +21,7 @@ export class UserService {
       DOB: ''
   };
 
-  constructor(private http: HttpClient, private router: Router) { 
+  constructor() { 
     this.users.push(this.currUser);
     this.users.push({
       id: 0, 
