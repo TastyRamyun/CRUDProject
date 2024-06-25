@@ -1,0 +1,76 @@
+<div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-8" style="padding-top: 25px">
+        <div class="card" >
+          <div class="card-header" >
+            <h1 class="card-title">Employees</h1>
+          </div>
+          <div class="card-body">
+            <div class="row">
+              <div class="col-md-6" *ngIf="!creatingUser">
+                <div class="actions" *ngIf="(users$ | async) as users$">
+                  <ul>
+                    <li *ngFor="let user of users$">
+                        {{user.firstName}} {{user.lastName}}
+                    </li>
+                  </ul>
+                  <button (click)="addUser()" class="btn btn-primary">Add New</button>
+                  <button (click)="toDash()" class="btn btn-danger">Back</button>
+                </div>
+              </div>
+              <div class="col-md-6" *ngIf="creatingUser">
+                <form onSubmit={handleSubmit}>
+                  <div class="form-group">
+                    <label>First Name: *</label>
+                    <input id="firstName" type="text" placeholder="Johnny" required>
+                  </div>
+                  <div class="form-group">
+                    <label>Last Name: *</label>
+                    <input id="lastName" type="text" placeholder="Appleseed" required>
+                  </div>
+                  <div class="form-group">
+                    <label>Email: *</label>
+                    <input id="email" type="email" placeholder="JohnnyA@me.com" required>
+                  </div>
+                  <div class="form-group">
+                    <label>Password: *</label>
+                    <input id="password" type="text" placeholder="password123" required>
+                  </div>
+                  <div class="form-group">
+                    <label>Role: *</label>
+                    <input id="role" type="text" placeholder="CEO" required>
+                  </div>
+                  <div class="form-group">
+                    <label>Permissions: *</label>
+                    <select id="permissions" required>
+                      <option>Select an option</option>
+                      <option value="Admin">Admin</option>
+                      <option value="Associate">Associate</option>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label>Address: </label>
+                    <input id="address" type="text" placeholder="123 Road Dr.">
+                  </div>
+                  <div class="form-group">
+                    <label>City: </label>
+                    <input id="city" type="text" placeholder="Houston">
+                  </div>
+                  <div class="form-group">
+                    <label>Phone: </label>
+                    <input id="phone" type="number" placeholder= 8323125753>
+                  </div>
+                  <div class="form-group">
+                    <label>Date of Birth: </label>
+                    <input id="DOB" type="text" placeholder="01/01/1999">
+                  </div>
+                  <button (click)="saveUser()" class="btn btn-primary" type="submit">Confirm New Employee</button>
+                  <button (click)="cancelNewUser()" class="btn btn-danger">Cancel</button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { DashboardComponent } from './dashboard/dashboard.component';
 import { AppComponent } from './app.component';
-import { LoginComponent } from './login/login.component';
-import { ProfileComponent } from './profile/profile.component';
-import { EmployeesComponent } from './employees/employees.component';
+import { LoginComponent } from './components/login/login.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { ProfileComponent } from './components/profile/profile.component';
+import { EmployeesComponent } from './components/employees/employees.component';
 
 const routes: Routes = [
   { path: '', component: AppComponent},

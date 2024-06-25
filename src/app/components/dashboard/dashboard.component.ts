@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { UserService } from '../user.service';
-import { User } from '../user.model';
+import { UserService } from '../../user.service';
+import { User } from '../../models/user.model';
 
 
 @Component({
@@ -18,7 +18,6 @@ export class DashboardComponent {
   logout(){
     this.router.navigate(['/login']);
     this.userService.setCurrUser('');
-    console.log(this.userService.getCurrUser());
   }
 
   toProfile(){

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { UserService } from '../user.service';
-import { User } from '../user.model';
+import { UserService } from '../../user.service';
+import { User } from '../../models/user.model';
 
 @Component({
   selector: 'app-login',
@@ -19,7 +19,6 @@ export class LoginComponent {
   onSubmit(email: string, password: string) {
     const user: User | undefined = this.userService.getUserByEmail(email);
     if (user) {
-      console.log(user)
       this.invalidLogin = false;
       this.router.navigate(['/dash']);
       this.userService.setCurrUser(email);

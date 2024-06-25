@@ -1,0 +1,20 @@
+<div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-8" style="padding-top: 25px">
+        <div class="card" >
+          <div class="card-header" >
+            <h1 class="card-title">Welcome, {{user.firstName}}</h1>
+          </div>
+          <div class="card-body">
+            Actions
+            <div class="row">
+              <div class="col-md-6">
+                <button (click)="this.toEmployees()" class="btn btn-primary" *ngIf="this.user.permissions === 'Admin'">Employees</button>
+                <button (click)="this.toProfile()" class="btn btn-primary">View Profile</button>
+                <button (click)="this.logout()" class="btn btn-danger">Logout</button>
+              </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

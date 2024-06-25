@@ -1,0 +1,67 @@
+<div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-8" style="padding-top: 25px;">
+        <div class="card">
+          <div class="card-header">
+            <h1 class="card-title">My Profile</h1>
+          </div>
+          <div class="card-body">
+            <div class="row">
+              <div class="col-md-6" *ngIf="isEditing">
+                <form onSubmit={handleSubmit} class="editing-form">
+                  <div class="form-group">
+                    <label>First Name: </label>
+                    <input id="firstName" type="text" value={{user.firstName}}>
+                  </div>
+                  <div class="form-group">
+                    <label>Last Name: </label>
+                    <input id="lastName" type="text" value={{user.lastName}}>
+                  </div>
+                  <div class="form-group">
+                    <label>Email: </label>
+                    <input id="email" type="text" value={{user.email}}>
+                  </div>
+                  <div class="form-group">
+                    <label>Password: </label>
+                    <input id="password" type="text" value={{user.password}}>
+                  </div>
+                  <div class="form-group">
+                    <label>Address: </label>
+                    <input id="address" type="text" value={{user.address}}>
+                  </div>
+                  <div class="form-group">
+                    <label>City: </label>
+                    <input id="city" type="text" value={{user.city}}>
+                  </div>
+                  <div class="form-group">
+                    <label>Phone: </label>
+                    <input id="phone" type="number" value={{user.phone}}>
+                  </div>
+                  <button (click)="updateUser()" type="submit" class="btn btn-primary">Submit Changes</button>
+                  <button (click)="exitEdit()" class="btn btn-danger">Exit</button>
+                </form>
+              </div>
+              <div *ngIf="!isEditing" class="actions">
+                <div class="viewing">
+                  <ul>
+                    <li class="profileData">First Name: {{this.user.firstName}} </li>
+                    <li class="profileData">Last Name: {{this.user.lastName}}</li>
+                    <li class="profileData">Email: {{this.user.email}}</li>
+                    <li class="profileData">Password: {{this.user.password}}</li>
+                    <li class="profileData">Role: {{this.user.role}}</li>
+                    <li class="profileData" *ngIf="this.user.permissions == 'Admin'">Permissions: {{this.user.permissions}}</li>
+                    <li class="profileData">Phone: {{this.user.phone}}</li>
+                    <li class="profileData">Address: {{this.user.address}}</li>
+                    <li class="profileData">City: {{this.user.city}}</li>
+                    <li class="profileData">Date of Birth: {{this.user.DOB}}</li>
+                  </ul>
+                </div>
+                <button class="btn btn-primary" (click)="editProfile()">Edit Profile</button>
+                <button class="btn btn-danger" (click)="toDashboard()">Exit</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

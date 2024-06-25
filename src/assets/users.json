@@ -1,0 +1,15 @@
+[
+    {    
+        "id": 1,
+        "email": "ep17@me.com",
+        "password": "1",
+        "firstName": "Enrique",
+        "lastName": "Perez",
+        "role": "CEO",
+        "permissions": "admin",
+        "address": "123 Main St",
+        "city": "Houston",
+        "phone": 1234567890,
+        "DOB": "1999-01-01"
+    }
+]
