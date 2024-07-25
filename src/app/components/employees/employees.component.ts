@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { User } from '../../models/user.model';
 import { UserService } from '../../user.service';
+import { NgForm } from '@angular/forms';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-employees',
@@ -9,54 +11,33 @@ import { UserService } from '../../user.service';
   styleUrl: './employees.component.css'
 })
 export class EmployeesComponent{
-  users$ = this.userService.getUsers$();
+  users$: Observable<User[]>
   creatingUser: boolean = false;
-  newUser: User = {
-    id: -1,
-    email: '',
-    password: '',
-    firstName: '',
-    lastName: '',
-    role: '',
-    permissions: ''
-  }
+  newUser: User = this.getEmptyUser();
   
   constructor(private userService: UserService,private router: Router){
+    this.users$ = this.userService.getUsers$();
   }
 
-  saveUser(){
-    const id = this.userService.numberUsers()
-    console.log(id)
-    this.newUser.id = id - 1
-    const firstName = document.getElementById('firstName') as HTMLInputElement
-    this.newUser.firstName = firstName.value
-    const lastName = document.getElementById('lastName') as HTMLInputElement
-    this.newUser.lastName = lastName.value
-    const email = document.getElementById('email') as HTMLInputElement
-    this.newUser.email = email.value
-    const password = document.getElementById('password') as HTMLInputElement
-    this.newUser.password = password.value
-    const role = document.getElementById('role') as HTMLInputElement
-    this.newUser.role = role.value
-    const permissions = document.getElementById('permissions') as HTMLInputElement
-    this.newUser.permissions = permissions.value
-    const address = document.getElementById('address') as HTMLInputElement
-    this.newUser.address = address.value
-    const city = document.getElementById('city') as HTMLInputElement
-    this.newUser.city = city.value
-    const phone = document.getElementById('phone') as HTMLInputElement
-    this.newUser.phone = parseInt(phone.value)
-    const DOB = document.getElementById('DOB') as HTMLInputElement
-    this.newUser.DOB = DOB.value
+  saveUser(form: NgForm){
+    if (form.valid) {
+      console.log('User data:', this.newUser);
+      const newUserCopy = { ...this.newUser };
+      this.userService.newUser(newUserCopy)
+      this.newUser = this.getEmptyUser();
+      this.users$ = this.userService.getUsers$();
 
-    this.userService.newUser(this.newUser)
-    this.resetNewUser();
-    this.creatingUser = false;
-    console.log(this.users$)
+      this.creatingUser = false;
+      this.users$.subscribe(users => {
+        console.log('Current list of users:', users);
+      });
+    } else {
+      console.log('Form is invalid');
+    }
   }
 
   resetNewUser(){
-    this.newUser.id = -1
+    this.newUser.id = 0
     this.newUser.firstName = ''
     this.newUser.lastName = ''
     this.newUser.email = ''
@@ -74,10 +55,27 @@ export class EmployeesComponent{
   }
 
   addUser(){
+    this.resetNewUser();
     this.creatingUser = true;
   }
 
   cancelNewUser(){
     this.creatingUser = false;
+  }
+
+  getEmptyUser(): User {
+    return {
+      id: this.userService.numberUsers(),
+      firstName: '',
+      lastName: '',
+      email: '',
+      password: '',
+      role: '',
+      permissions: '',
+      address: '',
+      city: '',
+      phone: 0,
+      DOB: ''
+    };
   }
 }

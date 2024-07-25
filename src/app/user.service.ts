@@ -22,7 +22,6 @@ export class UserService {
   };
 
   constructor() { 
-    this.users.push(this.currUser);
     this.users.push({
       id: 0, 
       email: 'ep17@me.com',
@@ -41,7 +40,7 @@ export class UserService {
   getUsers$(): Observable<User[]> {
     return of(this.users);
   }
-
+  
   // Get user by email
   getUserByEmail(email: string): User | undefined{
     const user = this.users.find(user => user.email === email);

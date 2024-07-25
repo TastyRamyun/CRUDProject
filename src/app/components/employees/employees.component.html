@@ -19,30 +19,30 @@
                 </div>
               </div>
               <div class="col-md-6" *ngIf="creatingUser">
-                <form onSubmit={handleSubmit}>
+                <form #userForm="ngForm" (ngSubmit)="saveUser(userForm)">
                   <div class="form-group">
                     <label>First Name: *</label>
-                    <input id="firstName" type="text" placeholder="Johnny" required>
+                    <input id="firstName" name="firstName" type="text" placeholder="Johnny" [(ngModel)]="newUser.firstName" required>
                   </div>
                   <div class="form-group">
                     <label>Last Name: *</label>
-                    <input id="lastName" type="text" placeholder="Appleseed" required>
+                    <input id="lastName" name="lastName" type="text" placeholder="Appleseed" [(ngModel)]="newUser.lastName" required>
                   </div>
                   <div class="form-group">
                     <label>Email: *</label>
-                    <input id="email" type="email" placeholder="JohnnyA@me.com" required>
+                    <input id="email" name="email" type="email" placeholder="JohnnyA@me.com" [(ngModel)]="newUser.email" required>
                   </div>
                   <div class="form-group">
                     <label>Password: *</label>
-                    <input id="password" type="text" placeholder="password123" required>
+                    <input id="password" name="password" type="text" placeholder="password123" [(ngModel)]="newUser.password" required>
                   </div>
                   <div class="form-group">
                     <label>Role: *</label>
-                    <input id="role" type="text" placeholder="CEO" required>
+                    <input id="role" name="role"type="text" placeholder="CEO" [(ngModel)]="newUser.role" required>
                   </div>
                   <div class="form-group">
                     <label>Permissions: *</label>
-                    <select id="permissions" required>
+                    <select id="permissions" name="permissions" [(ngModel)]="newUser.permissions"required>
                       <option>Select an option</option>
                       <option value="Admin">Admin</option>
                       <option value="Associate">Associate</option>
@@ -50,21 +50,21 @@
                   </div>
                   <div class="form-group">
                     <label>Address: </label>
-                    <input id="address" type="text" placeholder="123 Road Dr.">
+                    <input id="address" name="address" type="text" placeholder="123 Road Dr." [(ngModel)]="newUser.address">
                   </div>
                   <div class="form-group">
                     <label>City: </label>
-                    <input id="city" type="text" placeholder="Houston">
+                    <input id="city" name="city" type="text" placeholder="Houston" [(ngModel)]="newUser.city">
                   </div>
                   <div class="form-group">
                     <label>Phone: </label>
-                    <input id="phone" type="number" placeholder= 8323125753>
+                    <input id="phone" name="phone" type="number" placeholder= 8323125753 [(ngModel)]="newUser.phone">
                   </div>
                   <div class="form-group">
                     <label>Date of Birth: </label>
-                    <input id="DOB" type="text" placeholder="01/01/1999">
+                    <input id="DOB" name="DOB" type="text" placeholder="01/01/1999" [(ngModel)]="newUser.DOB">
                   </div>
-                  <button (click)="saveUser()" class="btn btn-primary" type="submit">Confirm New Employee</button>
+                  <button class="btn btn-primary" type="submit">Confirm New Employee</button>
                   <button (click)="cancelNewUser()" class="btn btn-danger">Cancel</button>
                 </form>
               </div>
