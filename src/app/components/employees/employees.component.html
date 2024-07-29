@@ -49,6 +49,10 @@
                     </select>
                   </div>
                   <div class="form-group">
+                    <label>Date of Birth: *</label>
+                    <input id="DOB" name="DOB" type="text" placeholder="01/01/1999" [(ngModel)]="newUser.DOB" required>
+                  </div>
+                  <div class="form-group">
                     <label>Address: </label>
                     <input id="address" name="address" type="text" placeholder="123 Road Dr." [(ngModel)]="newUser.address">
                   </div>
@@ -59,10 +63,6 @@
                   <div class="form-group">
                     <label>Phone: </label>
                     <input id="phone" name="phone" type="number" placeholder= 8323125753 [(ngModel)]="newUser.phone">
-                  </div>
-                  <div class="form-group">
-                    <label>Date of Birth: </label>
-                    <input id="DOB" name="DOB" type="text" placeholder="01/01/1999" [(ngModel)]="newUser.DOB">
                   </div>
                   <button class="btn btn-primary" type="submit">Confirm New Employee</button>
                   <button (click)="cancelNewUser()" class="btn btn-danger">Cancel</button>

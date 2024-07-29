@@ -33,6 +33,7 @@ export class EmployeesComponent{
       });
     } else {
       console.log('Form is invalid');
+      alert('Please fill in all fields labled with an asterisk');
     }
   }
 
