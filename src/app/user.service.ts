@@ -87,6 +87,8 @@ export class UserService {
   // Delete user
   deleteUser(id: number): void {
     this.users = this.users.filter(user => user.id !== id);
+    console.log(this.users)
+    this.getUsers$();
   }
 
   // New User
@@ -95,6 +97,7 @@ export class UserService {
   }
 
   numberUsers(): number{
+    this.getUsers$();
     return this.users.length
   }
 

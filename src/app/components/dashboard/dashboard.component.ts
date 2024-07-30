@@ -11,7 +11,7 @@ import { User } from '../../models/user.model';
 })
 
 export class DashboardComponent {
-  user: User = this.userService.getCurrUser(); //Not sure if Im supposed to be adding undefined to all of these.
+  user: User = this.userService.getCurrUser()
   constructor(private router: Router, private userService: UserService){
   }
 
@@ -27,8 +27,4 @@ export class DashboardComponent {
   toEmployees(){
     this.router.navigate(['/employees']);
   }
-
-  
-  
-
 }

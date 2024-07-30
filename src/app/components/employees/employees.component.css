@@ -3,12 +3,10 @@
     flex-direction: column;
     margin-bottom: 15px;
 }
-  
 .form-group label {
     margin-bottom: 5px;
     font-weight: bold;
 }
-
 .form-group input,
 .form-group select {
   padding: 8px;
@@ -16,11 +14,58 @@
   border-radius: 4px;
   font-size: 16px;
 }
-
 button[type="submit"] {
   cursor: pointer;
 }
-
 button[type="submit"]:hover {
   background-color: #0056b3;
+}
+.cursor-pointer {
+  cursor: pointer;
+}
+.ml-2 {
+  margin-left: 1rem;
+}
+ul li .icon{
+  color: #000; /* Default color */
+  transition: color 0.3s ease; /* Smooth transition for color change */
+}
+ul li .icon:hover {
+  color: #007bff; /* Change to desired hover color */
+  transform: scale(1.1);
+}
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.user-item {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  position: relative; /* For positioning the icons absolutely */
+}
+
+/* Hide the icons by default */
+.icons {
+  display: none;
+  margin-left: auto; /* Push icons to the right */
+}
+
+/* Show icons when hovering over the list item */
+.user-item:hover .icons {
+  display: flex;
+  align-items: center; /* Center the icons vertically */
+}
+
+/* Optional: Additional styling for icons */
+.icons i {
+  color: #000;
+  transition: color 0.3s ease, transform 0.3s ease;
+  font-size: 1.5rem;
+}
+
+.icons i:hover {
+  color: #007bff;
+  transform: scale(1.2);
 }

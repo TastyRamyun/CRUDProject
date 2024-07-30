@@ -13,6 +13,7 @@ import { Observable, map } from 'rxjs';
 export class EmployeesComponent{
   users$: Observable<User[]>
   creatingUser: boolean = false;
+  editingUser: boolean = false;
   newUser: User = this.getEmptyUser();
   
   constructor(private userService: UserService,private router: Router){
@@ -41,27 +42,29 @@ export class EmployeesComponent{
     })
   }
 
-  resetNewUser(){
-    this.newUser.id = this.userService.numberUsers()
-    this.newUser.firstName = ''
-    this.newUser.lastName = ''
-    this.newUser.email = ''
-    this.newUser.password = ''
-    this.newUser.role = ''
-    this.newUser.permissions = ''
-    this.newUser.phone = 0
-    this.newUser.city = ''
-    this.newUser.address = ''
-    this.newUser.DOB = ''
-  }
- 
   toDash(){
     this.router.navigate(['/dash']);
   }
 
   addUser(){
-    this.resetNewUser();
+    this.newUser = this.getEmptyUser()
     this.creatingUser = true;
+  }
+
+  editUser(user: User){
+    console.log("Editing")
+    this.editingUser = true;
+  }
+
+  deleteUser(user: User){
+    if(this.userService.getCurrUser() !== user){
+      if (window.confirm('Are you sure you want to delete this user?')) {
+        this.userService.deleteUser(user.id);
+        this.users$ = this.userService.getUsers$()
+      }
+    }else{
+      alert("You cannot delete yourself.")
+    }
   }
 
   cancelNewUser(){

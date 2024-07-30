@@ -1,17 +1,30 @@
+<head>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
 <div class="container">
     <div class="row justify-content-center">
-      <div class="col-md-8" style="padding-top: 25px">
+      <div class="col-md-14" style="padding-top: 25px">
         <div class="card" >
           <div class="card-header" >
             <h1 class="card-title">Employees</h1>
           </div>
           <div class="card-body">
             <div class="row">
-              <div class="col-md-6" *ngIf="!creatingUser">
-                <div class="actions" *ngIf="(users$ | async) as users$">
+              <div class="col-md-14" *ngIf="!creatingUser">
+                <div *ngIf="(users$ | async) as users$">
                   <ul>
-                    <li *ngFor="let user of users$">
-                        {{user.firstName}} {{user.lastName}}
+                    <li *ngFor="let user of users$" class="user-item">
+                      <span class="user-info">
+                        {{user.firstName}} {{user.lastName}} 
+                      </span>
+                        <div class="icons">
+                          <i class="fa fa-pencil cursor-pointer icon"
+                            (click)="editUser(user)"
+                            title="Edit" ></i>
+                          <i class="fa fa-trash cursor-pointer ml-2 icon"
+                            (click)="deleteUser(user)"
+                            title="Delete" ></i>
+                        </div>
                     </li>
                   </ul>
                   <button (click)="addUser()" class="btn btn-primary">Add New</button>
