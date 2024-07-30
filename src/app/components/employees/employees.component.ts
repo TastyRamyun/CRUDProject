@@ -21,7 +21,6 @@ export class EmployeesComponent{
 
   saveUser(form: NgForm){
     if (form.valid) {
-      console.log('User data:', this.newUser);
       const newUserCopy = { ...this.newUser };
       this.userService.newUser(newUserCopy)
       this.newUser = this.getEmptyUser();
@@ -38,7 +37,7 @@ export class EmployeesComponent{
   }
 
   resetNewUser(){
-    this.newUser.id = 0
+    this.newUser.id = this.userService.numberUsers()
     this.newUser.firstName = ''
     this.newUser.lastName = ''
     this.newUser.email = ''

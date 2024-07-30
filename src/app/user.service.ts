@@ -24,10 +24,10 @@ export class UserService {
   constructor() { 
     this.users.push({
       id: 0, 
-      email: 'ep17@me.com',
-      password:'pass', 
       firstName: 'Enrique', 
       lastName: 'Perez', 
+      email: 'ep17@me.com',
+      password:'pass', 
       role: 'CEO', 
       permissions: 'Admin', 
       address: '25214 Clover Ranch Dr.', 
