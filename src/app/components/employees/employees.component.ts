@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { User } from '../../models/user.model';
 import { UserService } from '../../user.service';
 import { NgForm } from '@angular/forms';
-import { Observable } from 'rxjs';
+import { Observable, map } from 'rxjs';
 
 @Component({
   selector: 'app-employees',
@@ -20,20 +20,25 @@ export class EmployeesComponent{
   }
 
   saveUser(form: NgForm){
-    if (form.valid) {
-      const newUserCopy = { ...this.newUser };
-      this.userService.newUser(newUserCopy)
-      this.newUser = this.getEmptyUser();
-      this.users$ = this.userService.getUsers$();
+    this.isEmailTaken(this.newUser.email).subscribe(emailTaken => {
+      if (form.valid && !emailTaken) {
+        const newUserCopy = { ...this.newUser };
+        this.userService.newUser(newUserCopy)
+        this.newUser = this.getEmptyUser();
+        this.users$ = this.userService.getUsers$();
 
-      this.creatingUser = false;
-      this.users$.subscribe(users => {
-        console.log('Current list of users:', users);
-      });
-    } else {
-      console.log('Form is invalid');
-      alert('Please fill in all fields labled with an asterisk');
-    }
+        this.creatingUser = false;
+        this.users$.subscribe(users => {
+          console.log('Current list of users:', users);
+        });
+      } else if(emailTaken){
+        console.log('Email is taken!');
+        alert('This email is already in use!')
+      } else {
+        console.log('Form is invalid');
+        alert('Please fill in all fields labled with an asterisk');
+      }
+    })
   }
 
   resetNewUser(){
@@ -77,5 +82,11 @@ export class EmployeesComponent{
       phone: 0,
       DOB: ''
     };
+  }
+
+  isEmailTaken(email: string): Observable<boolean> {
+    return this.users$.pipe(
+      map(users => users.some(user => user.email === email))
+    );
   }
 }
