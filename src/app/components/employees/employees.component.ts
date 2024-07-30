@@ -59,7 +59,7 @@ export class EmployeesComponent{
   deleteUser(user: User){
     if(this.userService.getCurrUser() !== user){
       if (window.confirm('Are you sure you want to delete this user?')) {
-        this.userService.deleteUser(user.id);
+        this.userService.deleteUser(user);
         this.users$ = this.userService.getUsers$()
       }
     }else{
@@ -73,7 +73,6 @@ export class EmployeesComponent{
 
   getEmptyUser(): User {
     return {
-      id: this.userService.numberUsers(),
       firstName: '',
       lastName: '',
       email: '',

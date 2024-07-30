@@ -8,7 +8,6 @@ import { Observable, Subscription, of } from 'rxjs';
 export class UserService {
   private users: User[] = [];
   private currUser: User = {
-      id: -1, 
       email: '',
       password:'', 
       firstName: '', 
@@ -23,7 +22,6 @@ export class UserService {
 
   constructor() { 
     this.users.push({
-      id: 0, 
       firstName: 'Enrique', 
       lastName: 'Perez', 
       email: 'ep17@me.com',
@@ -47,17 +45,10 @@ export class UserService {
     return user ? user : undefined;
   }
 
-  // Get user by Id
-  getUserById(id: number): User | undefined{
-    const user = this.users.find(user => user.id === id)
-    return user? user : undefined
-  }
-
   // Sets the current user
   setCurrUser(email: string): void {
     const user = this.users.find(user => user.email === email);
     user? this.currUser = user : this.currUser = {
-      id: -1, 
       email: '',
       password:'', 
       firstName: '', 
@@ -77,7 +68,7 @@ export class UserService {
 
   // Update user
   updateUser(updatedUser: User): void {
-    const index = this.users.findIndex(user => user.id === updatedUser.id);
+    const index = this.users.findIndex(user => user === updatedUser);
     if (index !== -1) {
       this.users[index] = updatedUser;
       console.log(this.users)
@@ -85,8 +76,8 @@ export class UserService {
   }
 
   // Delete user
-  deleteUser(id: number): void {
-    this.users = this.users.filter(user => user.id !== id);
+  deleteUser(userToBeDeleted: User): void {
+    this.users = this.users.filter(user => user.email !== userToBeDeleted.email);
     console.log(this.users)
     this.getUsers$();
   }
