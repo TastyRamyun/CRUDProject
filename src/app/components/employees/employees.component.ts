@@ -15,6 +15,7 @@ export class EmployeesComponent{
   creatingUser: boolean = false;
   editingUser: boolean = false;
   newUser: User = this.getEmptyUser();
+  user: User = this.userService.getCurrUser()
   
   constructor(private userService: UserService,private router: Router){
     this.users$ = this.userService.getUsers$();
@@ -46,14 +47,47 @@ export class EmployeesComponent{
     this.router.navigate(['/dash']);
   }
 
-  addUser(){
+  toNewUser(){
     this.newUser = this.getEmptyUser()
     this.creatingUser = true;
   }
 
-  editUser(user: User){
-    console.log("Editing")
+  cancelNewUser(){
+    this.creatingUser = false;
+  }
+
+  toEditUser(userToEdit: User){
+    console.log(userToEdit)
+    this.user = userToEdit
     this.editingUser = true;
+  }
+
+  saveEdittedUser(form: NgForm) {
+    this.isEmailTaken(this.newUser.email).subscribe(emailTaken => {
+      if (form.valid && !emailTaken) {
+        const updatedUserCopy = { ...this.user };
+        this.userService.updateUser(updatedUserCopy)
+        this.user = this.userService.getCurrUser();
+        console.log("Current user: " + this.user)
+        this.users$ = this.userService.getUsers$();
+
+        this.editingUser = false;
+        this.users$.subscribe(users => {
+          console.log('Current list of users:', users);
+        });
+      } else if(emailTaken){
+        console.log('Email is taken!');
+        alert('This email is already in use!')
+      } else {
+        console.log('Form is invalid');
+        alert('Please fill in all fields labled with an asterisk');
+      }
+    })
+  }
+
+  cancelEdit(){
+    this.user = this.userService.getCurrUser();
+    this.editingUser = false;
   }
 
   deleteUser(user: User){
@@ -65,10 +99,6 @@ export class EmployeesComponent{
     }else{
       alert("You cannot delete yourself.")
     }
-  }
-
-  cancelNewUser(){
-    this.creatingUser = false;
   }
 
   getEmptyUser(): User {
