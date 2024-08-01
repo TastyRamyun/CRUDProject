@@ -1,0 +1,22 @@
+[
+    {
+         "id": 1,
+         "name": "CEO",
+         "permissions": [1]
+    },
+    {
+        "id": 2,
+        "name": "Manager",
+        "permissions": [2, 3]
+    },
+    {
+        "id": 3,
+        "name": "Associate",
+        "permissions": [3, 4]
+    },
+    {
+        "id": 4,
+        "name": "Intern",
+        "permissions": [4]
+    }
+]

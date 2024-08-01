@@ -3,15 +3,15 @@ export class User{
     password: string;
     firstName: string;
     lastName: string;
-    role: string;
-    permissions: string;
+    role: number;
+    permissions: string[];
     address?: string;
     city?: string;
     phone?: number;
     DOB?: string;
 
   
-    constructor(email: string, password: string,firstName: string,lastName: string, role: string,permissions: string, address?: string, city?: string,phone?: number,DOB?: string) {
+    constructor(email: string, password: string,firstName: string,lastName: string, role: number,permissions: string[], address?: string, city?: string,phone?: number,DOB?: string) {
       this.email = email;
       this.password = password;
       this.firstName = firstName;

@@ -1,6 +1,9 @@
 import { Injectable } from '@angular/core';
 import { User } from './models/user.model';
-import { Observable, Subscription, of } from 'rxjs';
+import { Observable, Subscription, map, of } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { Role } from './models/role.model';
+import { Permission } from './models/permissions.model';
 
 @Injectable({
   providedIn: 'root'
@@ -12,27 +15,63 @@ export class UserService {
       password:'', 
       firstName: '', 
       lastName: '', 
-      role: '', 
-      permissions: '', 
+      role: 0, 
+      permissions: [], 
       address: '', 
       city: '', 
-      phone: -1, 
+      phone: 0, 
       DOB: ''
   };
 
-  constructor() { 
+  ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  private usersUrl = '/assets/data/users.json';
+  private rolesUrl = '/assets/data/roles.json';
+  private permissionsUrl = '/assets/data/permissions.json';
+
+  constructor(private http: HttpClient) { 
     this.users.push({
       firstName: 'Enrique', 
       lastName: 'Perez', 
       email: 'ep17@me.com',
       password:'pass', 
-      role: 'CEO', 
-      permissions: 'Admin', 
+      role: 1, 
+      permissions: ['Admin'], 
       address: '25214 Clover Ranch Dr.', 
       city: 'Katy', 
       phone: 8323125753, 
       DOB: '01/01/1999'})
   }
+
+  getUsers(): Observable<User[]> {
+    return this.http.get<User[]>(this.usersUrl);
+  }
+
+  getRoles(): Observable<Role[]> {
+    return this.http.get<Role[]>(this.rolesUrl);
+  }
+
+  getPermissions(): Observable<Permission[]> {
+    return this.http.get<Permission[]>(this.permissionsUrl);
+  }
+
+  // Example method to check if an email already exists
+  emailExists(email: string): Observable<boolean> {
+    return this.getUsers().pipe(
+      map(users => users.some(user => user.email === email))
+    );
+  }
+
+  // Example delete method
+  deleteUserRXJS(email: string): Observable<User[]> {
+    return this.getUsers().pipe(
+      map(users => users.filter(user => user.email !== email))
+    );
+  }
+
+
+
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 
   //"$" To mark a method returning an observable
   getUsers$(): Observable<User[]> {
@@ -53,11 +92,11 @@ export class UserService {
       password:'', 
       firstName: '', 
       lastName: '', 
-      role: '', 
-      permissions: '', 
+      role: 0, 
+      permissions: [], 
       address: '', 
       city: '', 
-      phone: -1, 
+      phone: 0, 
       DOB: ''
     };
   }
