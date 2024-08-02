@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { UserService } from '../../user.service';
 import { User } from '../../models/user.model';
+import { UserService } from '../../services/user.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-login',
@@ -11,21 +12,23 @@ import { User } from '../../models/user.model';
 
 export class LoginComponent {
   invalidLogin: boolean = false;
+  users$: Observable<User[]>
 
   constructor(private router: Router,private userService: UserService){
-
+    this.users$ = this.userService.getUsers();
   }
 
   onSubmit(email: string, password: string) {
-    const user: User | undefined = this.userService.getUserByEmail(email);
-    if (user) {
-      this.invalidLogin = false;
-      this.router.navigate(['/dash']);
-      this.userService.setCurrUser(email);
-    } else {
-      console.log('User not found!');
-      this.invalidLogin = true;
-    }
+    this.userService.getUserByEmail(email).subscribe(user => {
+      if (user) {
+        this.invalidLogin = false;
+        this.userService.setCurrUser(email);
+        this.router.navigate(['/dash']);
+      } else {
+        console.log('Invalid email or password!');
+        this.invalidLogin = true;
+      }
+    });
   }
 
 }

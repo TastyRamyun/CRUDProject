@@ -1,0 +1,89 @@
+{
+  "users": [
+    {
+      "id": "1",
+      "email": "ep17@me.com",
+      "password": "1",
+      "firstName": "Enrique",
+      "lastName": "Perez",
+      "role": 1,
+      "permissions": [
+        "admin"
+      ],
+      "address": "123 Main St",
+      "city": "Houston",
+      "phone": 1234567890,
+      "DOB": "1999-01-01"
+    },
+    {
+        "id": "2",
+        "email": "jess@me.com",
+        "password": "1",
+        "firstName": "Jessica",
+        "lastName": "Cordova",
+        "role": 2,
+        "permissions": [
+          "manager"
+        ],
+        "address": "25214 Clover Ranch Dr.",
+        "city": "Houston",
+        "phone": 1234567890,
+        "DOB": "1998-09-18"
+      },
+    {
+        "id": "3",
+        "email": "gabe@me.com",
+        "password": "1",
+        "firstName": "Gabriel",
+        "lastName": "Perez",
+        "role": 3,
+        "permissions": [
+          "basic"
+        ],
+        "address": "25214 Clover Ranch Dr.",
+        "city": "Houston",
+        "phone": 1234567890,
+        "DOB": "2013-06-15"
+      }
+  ],
+  "roles": [
+    {
+      "id": "1",
+      "name": "CEO",
+      "permissions": [
+        1
+      ]
+    },
+    {
+      "id": "2",
+      "name": "Manager",
+      "permissions": [
+        2
+      ]
+    },
+    {
+      "id": "3",
+      "name": "Intern",
+      "permissions": [
+        3
+      ]
+    }
+  ],
+  "permissions": [
+    {
+      "id": "1",
+      "name": "admin",
+      "description": "Admin permission"
+    },
+    {
+      "id": "2",
+      "name": "manager",
+      "description": "Permission to manage users"
+    },
+    {
+      "id": "3",
+      "name": "basic",
+      "description": "Basic access permission"
+    }
+  ]
+}

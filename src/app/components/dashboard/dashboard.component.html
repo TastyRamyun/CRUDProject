@@ -9,7 +9,7 @@
             Actions
             <div class="row">
               <div class="col-md-6">
-                <button (click)="this.toEmployees()" class="btn btn-primary" *ngIf="this.user.permissions === 'Admin'">Employees</button>
+                <button (click)="this.toEmployees()" class="btn btn-primary" *ngIf="this.user.permissions.includes('admin')">Employees</button>
                 <button (click)="this.toProfile()" class="btn btn-primary">View Profile</button>
                 <button (click)="this.logout()" class="btn btn-danger">Logout</button>
               </div>

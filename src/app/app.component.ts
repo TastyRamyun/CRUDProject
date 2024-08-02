@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { FetchService } from './fetch.service';
-import { UserService } from './user.service';
+import { FetchService } from './services/fetch.service';
+import { UserService } from './services/user.service';
+import { BackendService } from './services/backend.service';
 
 @Component({
   selector: 'app-root',
@@ -11,12 +12,11 @@ import { UserService } from './user.service';
 export class AppComponent {
   title = 'ngCRUDMaster';
   data: any 
-  constructor(private router: Router,private fetchService: FetchService,private userService:UserService){
+  constructor(private router: Router,private backendService: BackendService){
     this.router.navigate(['/login']);
-    this.fetchService.fetchData().subscribe(data => {
+    this.backendService.getAllData().subscribe(data => {
       this.data = data;
       console.log(this.data);
     });
   }
-
 }

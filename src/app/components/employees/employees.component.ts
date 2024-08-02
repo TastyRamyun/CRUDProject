@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { User } from '../../models/user.model';
-import { UserService } from '../../user.service';
 import { NgForm } from '@angular/forms';
 import { Observable, map } from 'rxjs';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-employees',
@@ -18,16 +18,16 @@ export class EmployeesComponent{
   user: User = this.userService.getCurrUser()
   
   constructor(private userService: UserService,private router: Router){
-    this.users$ = this.userService.getUsers$();
+    this.users$ = this.userService.getUsers();
   }
 
   saveUser(form: NgForm){
     this.isEmailTaken(this.newUser.email).subscribe(emailTaken => {
       if (form.valid && !emailTaken) {
         const newUserCopy = { ...this.newUser };
-        this.userService.newUser(newUserCopy)
+        this.userService.addUser(newUserCopy)
         this.newUser = this.getEmptyUser();
-        this.users$ = this.userService.getUsers$();
+        this.users$ = this.userService.getUsers();
 
         this.creatingUser = false;
         this.users$.subscribe(users => {
@@ -69,7 +69,7 @@ export class EmployeesComponent{
         this.userService.updateUser(updatedUserCopy)
         this.user = this.userService.getCurrUser();
         console.log("Current user: " + this.user)
-        this.users$ = this.userService.getUsers$();
+        this.users$ = this.userService.getUsers();
 
         this.editingUser = false;
         this.users$.subscribe(users => {
@@ -91,10 +91,18 @@ export class EmployeesComponent{
   }
 
   deleteUser(user: User){
-    if(this.userService.getCurrUser() !== user){
+    const currUser = this.userService.getCurrUser()
+    if(currUser.email !== user.email){
       if (window.confirm('Are you sure you want to delete this user?')) {
-        this.userService.deleteUser(user);
-        this.users$ = this.userService.getUsers$()
+        this.userService.deleteUser(user).subscribe(
+          () => {
+            console.log('User deleted successfully');
+            this.users$ = this.userService.getUsers()
+          },
+          (error) => {
+            console.error('Error deleting user:', error);
+          }
+        )
       }
     }else{
       alert("You cannot delete yourself.")
@@ -103,6 +111,7 @@ export class EmployeesComponent{
 
   getEmptyUser(): User {
     return {
+      id: 0,
       firstName: '',
       lastName: '',
       email: '',

@@ -49,7 +49,7 @@
                     <li class="profileData">Email: {{this.user.email}}</li>
                     <li class="profileData">Password: {{this.user.password}}</li>
                     <li class="profileData">Role: {{this.user.role}}</li>
-                    <li class="profileData" *ngIf="this.user.permissions == 'Admin'">Permissions: {{this.user.permissions}}</li>
+                    <li class="profileData" *ngIf="this.user.permissions == ['Admin']">Permissions: {{this.user.permissions}}</li>
                     <li class="profileData">Phone: {{this.user.phone}}</li>
                     <li class="profileData">Address: {{this.user.address}}</li>
                     <li class="profileData">City: {{this.user.city}}</li>

@@ -1,17 +1,31 @@
 import { createReducer, on } from '@ngrx/store';
-import { User } from '../models/user.model';
 import * as UserActions from './user.actions';
-
-export interface UserState {
-  users: User[];
-}
-
-export const initialState: UserState = {
-  users: []
-};
+import { UserState, initialUserState } from './user.state';
 
 export const userReducer = createReducer(
-  initialState,
-  on(UserActions.loadUsersSuccess, (state, { users }) => ({ ...state, users })),
-  on(UserActions.addUser, (state, { user }) => ({ ...state, users: [...state.users, user] }))
+  initialUserState,
+  on(UserActions.loadUsers, state => ({ ...state, loading: true })),
+  on(UserActions.loadUsersSuccess, (state, { users }) => ({
+    ...state,
+    loading: false,
+    users: users,
+    error: null,
+  })),
+  on(UserActions.loadUsersFailure, (state, { error }) => ({
+    ...state,
+    loading: false,
+    error: error,
+  })),
+  on(UserActions.addUser, state => ({ ...state, loading: true })),
+  on(UserActions.addUserSuccess, (state, { user }) => ({
+    ...state,
+    loading: false,
+    users: [...state.users, user],
+    error: null,
+  })),
+  on(UserActions.addUserFailure, (state, { error }) => ({
+    ...state,
+    loading: false,
+    error: error,
+  }))
 );
