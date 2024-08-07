@@ -81,4 +81,21 @@ export class UserService {
   addUser(user: User) {
     return this.backendService.addUser(user)
   }
+  
+  getEmptyUser(): User {
+    this.id = Date.now()
+    return {
+      id: this.id.toString(),
+      firstName: '',
+      lastName: '',
+      email: '',
+      password: '',
+      role: '',
+      permissions: '',
+      address: '',
+      city: '',
+      phone: 0,
+      DOB: ''
+    };
+  }
 }

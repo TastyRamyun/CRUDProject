@@ -8,36 +8,36 @@
           <div class="card-body">
             <div class="row">
               <div class="col-md-6" *ngIf="isEditing">
-                <form onSubmit={handleSubmit} class="editing-form">
+                <form #edittedUserForm="ngForm" (ngSubmit)="updateUser(edittedUserForm)">
                   <div class="form-group">
-                    <label>First Name: </label>
-                    <input id="firstName" type="text" value={{user.firstName}}>
+                    <label>First Name: *</label>
+                    <input id="firstName" name="firstName" type="text" value={{user.firstName}} [(ngModel)]="user.firstName" required>
                   </div>
                   <div class="form-group">
-                    <label>Last Name: </label>
-                    <input id="lastName" type="text" value={{user.lastName}}>
+                    <label>Last Name: *</label>
+                    <input id="lastName" name="lastName" type="text" value={{user.lastName}} [(ngModel)]="user.lastName" required>
                   </div>
                   <div class="form-group">
-                    <label>Email: </label>
-                    <input id="email" type="text" value={{user.email}}>
+                    <label>Email: *</label>
+                    <input id="email" name="email" type="text" value={{user.email}} [(ngModel)]="user.email" required>
                   </div>
                   <div class="form-group">
-                    <label>Password: </label>
-                    <input id="password" type="text" value={{user.password}}>
+                    <label>Password: *</label>
+                    <input id="password" name="password" type="text" value={{user.password}} [(ngModel)]="user.password" required>
                   </div>
                   <div class="form-group">
                     <label>Address: </label>
-                    <input id="address" type="text" value={{user.address}}>
+                    <input id="address" name="address" type="text" value={{user.address}} [(ngModel)]="user.address" required>
                   </div>
                   <div class="form-group">
                     <label>City: </label>
-                    <input id="city" type="text" value={{user.city}}>
+                    <input id="city" name="city" type="text" value={{user.city}} [(ngModel)]="user.city" required>
                   </div>
                   <div class="form-group">
                     <label>Phone: </label>
-                    <input id="phone" type="number" value={{user.phone}}>
+                    <input id="phone" name="phone" type="number" value={{user.phone}} [(ngModel)]="user.phone" required>
                   </div>
-                  <button (click)="updateUser()" type="submit" class="btn btn-primary">Submit Changes</button>
+                  <button type="submit" class="btn btn-primary">Submit Changes</button>
                   <button (click)="exitEdit()" class="btn btn-danger">Exit</button>
                 </form>
               </div>

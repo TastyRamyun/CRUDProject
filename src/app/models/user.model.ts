@@ -1,9 +1,9 @@
 export class User{
     id: string;
-    firstName: string;
-    lastName: string;
     email: string;
     password: string;
+    firstName: string;
+    lastName: string;
     role: string;
     permissions: string;
     address?: string;
@@ -12,12 +12,12 @@ export class User{
     DOB?: string;
 
   
-    constructor(id: string, firstName: string,lastName: string, email: string, password: string, role: string, permissions: string, address?: string, city?: string,phone?: number,DOB?: string) {
+    constructor(id: string, email: string, password: string, firstName: string,lastName: string, role: string, permissions: string, address?: string, city?: string,phone?: number,DOB?: string) {
       this.id = id;
-      this.firstName = firstName;
-      this.lastName = lastName;
       this.email = email;
       this.password = password;
+      this.firstName = firstName;
+      this.lastName = lastName;
       this.role = role;
       this.permissions = permissions;
       this.address = address;

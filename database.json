@@ -28,9 +28,9 @@
     },
     {
       "id": "3",
-      "email": "gabe@me.com",
-      "password": "1",
-      "firstName": "Gabriel",
+      "email": "seb@me.com",
+      "password": "NewPassword",
+      "firstName": "Sebas",
       "lastName": "Perez",
       "role": "Intern",
       "permissions": "basic",

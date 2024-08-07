@@ -15,7 +15,7 @@ export class EmployeesComponent{
   users$: Observable<User[]>
   creatingUser: boolean = false;
   editingUser: boolean = false;
-  newUser: User = this.getEmptyUser();
+  newUser: User = this.userService.getEmptyUser();
   user: User = this.userService.getCurrUser()
   
   constructor(private userService: UserService,private router: Router){
@@ -29,7 +29,7 @@ export class EmployeesComponent{
         this.userService.addUser(newUserCopy).subscribe(
           () => {
             console.log('User added successfully');
-            this.newUser = this.getEmptyUser();
+            this.newUser = this.userService.getEmptyUser();
             this.users$.subscribe(users => {
               console.log('Current list of users:', users);
             });
@@ -54,7 +54,7 @@ export class EmployeesComponent{
   }
 
   toNewUser(){
-    this.newUser = this.getEmptyUser()
+    this.newUser = this.userService.getEmptyUser()
     this.creatingUser = true;
   }
 
@@ -75,7 +75,7 @@ export class EmployeesComponent{
         this.userService.updateUser(updatedUserCopy).subscribe(
           () => {
             console.log('User updated successfully');
-            this.newUser = this.getEmptyUser();
+            this.newUser = this.userService.getEmptyUser();
             this.editingUser = false;
             this.user = this.userService.getCurrUser();
             this.users$ = this.userService.getUsers();
@@ -119,23 +119,6 @@ export class EmployeesComponent{
     }else{
       alert("You cannot delete yourself.")
     }
-  }
-
-  getEmptyUser(): User {
-    this.id = Date.now()
-    return {
-      id: this.id.toString(),
-      firstName: '',
-      lastName: '',
-      email: '',
-      password: '',
-      role: '',
-      permissions: '',
-      address: '',
-      city: '',
-      phone: 0,
-      DOB: ''
-    };
   }
 
   isEmailTaken(email: string): Observable<boolean> {

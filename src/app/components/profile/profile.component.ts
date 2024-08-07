@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { User } from '../../models/user.model';
 import { UserService } from '../../services/user.service';
+import { NgForm } from '@angular/forms';
+import { map, Observable } from 'rxjs';
 
 
 @Component({
@@ -10,29 +12,48 @@ import { UserService } from '../../services/user.service';
   styleUrl: './profile.component.css'
 })
 export class ProfileComponent {
+  newUser: User = this.userService.getEmptyUser();
+  users$: Observable<User[]>
+
   constructor(private router: Router,private userService: UserService){
+    this.users$ = this.userService.getUsers();
   }
   user: User = this.userService.getCurrUser();
   isEditing: boolean = false;
 
-  updateUser(){
-    const firstName = document.getElementById('firstName') as HTMLInputElement
-    this.user.firstName = firstName.value
-    const lastName = document.getElementById('lastName') as HTMLInputElement
-    this.user.lastName = lastName.value
-    const email = document.getElementById('email') as HTMLInputElement
-    this.user.email = email.value
-    const password = document.getElementById('password') as HTMLInputElement
-    this.user.password = password.value
-    const address = document.getElementById('address') as HTMLInputElement
-    this.user.address = address.value
-    const city = document.getElementById('city') as HTMLInputElement
-    this.user.city = city.value
-    const phone = document.getElementById('phone') as HTMLInputElement
-    this.user.phone = parseInt(phone.value)
+  updateUser(form: NgForm){
+    this.isEmailTaken(this.newUser.email).subscribe(emailTaken => {
+      if (form.valid && !emailTaken) {
+        const updatedUserCopy = { ...this.user };
+        this.userService.updateUser(updatedUserCopy).subscribe(
+          () => {
+            console.log('User updated successfully');
+            this.newUser = this.userService.getEmptyUser();
+            this.isEditing = false;
+            this.user = this.userService.getCurrUser();
+            this.users$ = this.userService.getUsers();
+            this.users$.subscribe(users => {
+              console.log('Current list of users:', users);
+            });
+          },
+          (error) => {
+            console.error('Error updating user:', error);
+          }
+        )
+      } else if(emailTaken){
+        console.log('Email is taken!');
+        alert('This email is already in use!')
+      } else {
+        console.log('Form is invalid');
+        alert('Please fill in all fields labled with an asterisk');
+      }
+    })
+  }
 
-    this.userService.updateUser(this.user)
-    this.isEditing= false;
+  isEmailTaken(email: string): Observable<boolean> {
+    return this.users$.pipe(
+      map(users => users.some(user => user.email === email))
+    );
   }
 
   toDashboard() {
