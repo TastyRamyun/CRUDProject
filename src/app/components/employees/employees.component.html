@@ -10,10 +10,18 @@
           </div>
           <div class="card-body">
             <div class="row">
+              <div class="toolbar" *ngIf="!editingUser && !creatingUser">
+                <input type="text" placeholder="Search by name..." [(ngModel)]="searchTerm" (ngModelChange)="onSearch()">
+                <select [(ngModel)]="sortDirection" (ngModelChange)="onSort()">
+                  <option value="">Sort By</option>
+                  <option value="asc">Name: A to Z</option>
+                  <option value="desc">Name: Z to A</option>
+                </select>
+              </div>
               <div class="col-md-14" *ngIf="!creatingUser && !editingUser">
-                <div *ngIf="(users$ | async) as users$">
+                <div *ngIf="filteredUsers.length">
                   <ul>
-                    <li *ngFor="let user of users$" class="user-item">
+                    <li *ngFor="let user of filteredUsers" class="user-item">
                       <span class="user-info">
                         {{user.firstName}} {{user.lastName}} 
                       </span>

@@ -27,30 +27,17 @@
       "DOB": "1998-09-18"
     },
     {
-      "id": "3",
-      "email": "seb@me.com",
-      "password": "NewPassword",
-      "firstName": "Sebas",
+      "id": "1723072636732",
+      "firstName": "Brenda",
       "lastName": "Perez",
-      "role": "Intern",
-      "permissions": "basic",
-      "address": "25214 Clover Ranch Dr.",
-      "city": "Houston",
-      "phone": 1234567890,
-      "DOB": "2013-06-15"
-    },
-    {
-      "id": "1723066353637",
-      "firstName": "Updated",
-      "lastName": "Guy",
-      "email": "updated@me.com",
-      "password": "e",
-      "role": "3",
-      "permissions": "basic",
-      "address": "123 Updated Dr.",
-      "city": "Update City",
-      "phone": 9999999999,
-      "DOB": "06/15/2013"
+      "email": "brenda@me.com",
+      "password": "2",
+      "role": "1",
+      "permissions": "associate",
+      "address": "",
+      "city": "",
+      "phone": 0,
+      "DOB": "09/18/24"
     }
   ],
   "roles": [

@@ -69,3 +69,33 @@ ul {
   color: #007bff;
   transform: scale(1.2);
 }
+
+.toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.toolbar input {
+  flex: 1;
+  margin-right: 10px; /* Optional: Add some space between the input and select */
+  max-width: 300px; /* Set the max width as needed */
+}
+
+.toolbar select {
+  margin-left: auto;
+}
+
+select{
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+.toolbar input{
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+}

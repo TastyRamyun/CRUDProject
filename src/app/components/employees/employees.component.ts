@@ -12,14 +12,22 @@ import { UserService } from '../../services/user.service';
 })
 export class EmployeesComponent{
   id: number = 0;
+  users: User[] = []
   users$: Observable<User[]>
   creatingUser: boolean = false;
   editingUser: boolean = false;
   newUser: User = this.userService.getEmptyUser();
   user: User = this.userService.getCurrUser()
+  filteredUsers: User[] = [];
+  searchTerm: string = '';
+  sortDirection: string = '';
   
   constructor(private userService: UserService,private router: Router){
     this.users$ = this.userService.getUsers();
+    this.users$.subscribe(users => {
+      this.users = users;
+      this.filteredUsers = users;
+    });
   }
 
   saveUser(form: NgForm){
@@ -31,6 +39,8 @@ export class EmployeesComponent{
             console.log('User added successfully');
             this.newUser = this.userService.getEmptyUser();
             this.users$.subscribe(users => {
+              this.users = users;
+              this.filteredUsers = users;
               console.log('Current list of users:', users);
             });
             this.creatingUser = false;
@@ -56,6 +66,9 @@ export class EmployeesComponent{
   toNewUser(){
     this.newUser = this.userService.getEmptyUser()
     this.creatingUser = true;
+    this.searchTerm = ""
+    this.sortDirection = ""
+    this.filteredUsers = this.users
   }
 
   cancelNewUser(){
@@ -80,6 +93,8 @@ export class EmployeesComponent{
             this.user = this.userService.getCurrUser();
             this.users$ = this.userService.getUsers();
             this.users$.subscribe(users => {
+              this.users = users;
+              this.filteredUsers = users;
               console.log('Current list of users:', users);
             });
           },
@@ -109,7 +124,12 @@ export class EmployeesComponent{
         this.userService.deleteUser(user).subscribe(
           () => {
             console.log('User deleted successfully');
-            this.users$ = this.userService.getUsers()
+            this.users$.subscribe(users => {
+              this.users$ = this.userService.getUsers()
+              this.users = users;
+              this.filteredUsers = users;
+              console.log('Current list of users:', users);
+            });
           },
           (error) => {
             console.error('Error deleting user:', error);
@@ -126,4 +146,35 @@ export class EmployeesComponent{
       map(users => users.some(user => user.email === email))
     );
   }
+
+  onSearch(){
+    this.filterAndSortUsers();
+  }
+
+  onSort() {
+    this.filterAndSortUsers();
+  }
+
+  filterAndSortUsers() {
+    let filtered = this.users;
+
+    if (this.searchTerm) {
+      filtered = filtered.filter(user =>
+        `${user.firstName} ${user.lastName}`.toLowerCase().includes(this.searchTerm.toLowerCase())
+      );
+    }
+
+    if (this.sortDirection) {
+      filtered.sort((a, b) => {
+        const nameA = `${a.firstName} ${a.lastName}`.toLowerCase();
+        const nameB = `${b.firstName} ${b.lastName}`.toLowerCase();
+        if (nameA < nameB) return this.sortDirection === 'asc' ? -1 : 1;
+        if (nameA > nameB) return this.sortDirection === 'asc' ? 1 : -1;
+        return 0;
+      });
+    }
+
+    this.filteredUsers = filtered;
+  }
+    
 }
