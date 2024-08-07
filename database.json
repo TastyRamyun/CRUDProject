@@ -41,15 +41,15 @@
     },
     {
       "id": "1723066353637",
-      "firstName": "Newer ",
+      "firstName": "Updated",
       "lastName": "Guy",
-      "email": "newer@me.com",
+      "email": "updated@me.com",
       "password": "e",
       "role": "3",
       "permissions": "basic",
-      "address": "",
-      "city": "",
-      "phone": 0,
+      "address": "123 Updated Dr.",
+      "city": "Update City",
+      "phone": 9999999999,
       "DOB": "06/15/2013"
     }
   ],

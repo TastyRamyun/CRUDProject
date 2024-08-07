@@ -70,12 +70,8 @@ export class UserService {
     return this.currUser
   }
 
-  updateUser(updatedUser: User): void {
-    const index = this.users.findIndex(user => user === updatedUser);
-    if (index !== -1) {
-      this.users[index] = updatedUser;
-      console.log(this.users)
-    }
+  updateUser(updatedUser: User) {
+    return this.backendService.updateUser(updatedUser)
   }
 
   deleteUser(user: User) {

@@ -45,6 +45,7 @@ export class BackendService {
   }
 
   updateUser(user: User): Observable<User> {
-    return this.fetchService.put<User>(`${this.usersUrl}/${user.email}`, user);
+    const url = `${this.usersUrl}/${user.id}`;
+    return this.fetchService.put<User>(url, user);
   }
 }

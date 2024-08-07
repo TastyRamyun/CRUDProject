@@ -72,15 +72,21 @@ export class EmployeesComponent{
     this.isEmailTaken(this.newUser.email).subscribe(emailTaken => {
       if (form.valid && !emailTaken) {
         const updatedUserCopy = { ...this.user };
-        this.userService.updateUser(updatedUserCopy)
-        this.user = this.userService.getCurrUser();
-        console.log("Current user: " + this.user)
-        this.users$ = this.userService.getUsers();
-
-        this.editingUser = false;
-        this.users$.subscribe(users => {
-          console.log('Current list of users:', users);
-        });
+        this.userService.updateUser(updatedUserCopy).subscribe(
+          () => {
+            console.log('User updated successfully');
+            this.newUser = this.getEmptyUser();
+            this.editingUser = false;
+            this.user = this.userService.getCurrUser();
+            this.users$ = this.userService.getUsers();
+            this.users$.subscribe(users => {
+              console.log('Current list of users:', users);
+            });
+          },
+          (error) => {
+            console.error('Error updating user:', error);
+          }
+        )
       } else if(emailTaken){
         console.log('Email is taken!');
         alert('This email is already in use!')

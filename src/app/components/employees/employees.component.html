@@ -50,8 +50,17 @@
                     <input id="password" name="password" type="text" value={{user.password}} [(ngModel)]="user.password" required>
                   </div>
                   <div class="form-group">
+                    <label>Role: *</label>
+                    <select id="role" name="role" [(ngModel)]="user.role"required>
+                      <option>Select an option</option>
+                      <option value= "1" >CEO</option>
+                      <option value= "2" >Manager</option>
+                      <option value= "3" >Intern</option>
+                    </select>
+                  </div>
+                  <div class="form-group">
                     <label>Permissions: *</label>
-                    <select id="permissions" name="permissions" [(ngModel)]="newUser.permissions"required>
+                    <select id="permissions" name="permissions" [(ngModel)]="user.permissions"required>
                       <option>Select an option</option>
                       <option value="admin">Admin</option>
                       <option value="manager">Associate</option>
@@ -96,9 +105,9 @@
                     <label>Role: *</label>
                     <select id="role" name="role" [(ngModel)]="newUser.role"required>
                       <option>Select an option</option>
-                      <option value= 1 >CEO</option>
-                      <option value= 2 >Manager</option>
-                      <option value= 3 >Intern</option>
+                      <option value= "1" >CEO</option>
+                      <option value= "2" >Manager</option>
+                      <option value= "3" >Intern</option>
                     </select>
                   </div>
                   <div class="form-group">
