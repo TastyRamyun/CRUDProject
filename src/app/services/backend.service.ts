@@ -36,16 +36,15 @@ export class BackendService {
   }
 
   addUser(user: User): Observable<User> {
-    console.log(user)
     return this.fetchService.post<User>(this.usersUrl, user);
-  }
-
-  updateUser(user: User): Observable<User> {
-    return this.fetchService.put<User>(`${this.usersUrl}/${user.email}`, user);
   }
 
   deleteUser(user: User): Observable<void> {
     const url = `${this.usersUrl}/${user.id}`;
     return this.fetchService.delete<void>(url);
+  }
+
+  updateUser(user: User): Observable<User> {
+    return this.fetchService.put<User>(`${this.usersUrl}/${user.email}`, user);
   }
 }

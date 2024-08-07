@@ -18,6 +18,7 @@ export class FetchService {
   }
 
   post<T>(url: string, data: any): Observable<T> {
+    console.log(`Adding User: ${url} , ${data}`)
     return this.http.post<T>(url, data, { headers: this.headers });
   }
 

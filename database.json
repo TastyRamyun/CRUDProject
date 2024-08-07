@@ -6,45 +6,52 @@
       "password": "1",
       "firstName": "Enrique",
       "lastName": "Perez",
-      "role": 1,
-      "permissions": [
-        "admin"
-      ],
+      "role": "CEO",
+      "permissions": "admin",
       "address": "123 Main St",
       "city": "Houston",
       "phone": 1234567890,
       "DOB": "1999-01-01"
     },
     {
-        "id": "2",
-        "email": "jess@me.com",
-        "password": "1",
-        "firstName": "Jessica",
-        "lastName": "Cordova",
-        "role": 2,
-        "permissions": [
-          "manager"
-        ],
-        "address": "25214 Clover Ranch Dr.",
-        "city": "Houston",
-        "phone": 1234567890,
-        "DOB": "1998-09-18"
-      },
+      "id": "2",
+      "email": "jess@me.com",
+      "password": "1",
+      "firstName": "Jessica",
+      "lastName": "Cordova",
+      "role": "Manger",
+      "permissions": "manager",
+      "address": "25214 Clover Ranch Dr.",
+      "city": "Houston",
+      "phone": 1234567890,
+      "DOB": "1998-09-18"
+    },
     {
-        "id": "3",
-        "email": "gabe@me.com",
-        "password": "1",
-        "firstName": "Gabriel",
-        "lastName": "Perez",
-        "role": 3,
-        "permissions": [
-          "basic"
-        ],
-        "address": "25214 Clover Ranch Dr.",
-        "city": "Houston",
-        "phone": 1234567890,
-        "DOB": "2013-06-15"
-      }
+      "id": "3",
+      "email": "gabe@me.com",
+      "password": "1",
+      "firstName": "Gabriel",
+      "lastName": "Perez",
+      "role": "Intern",
+      "permissions": "basic",
+      "address": "25214 Clover Ranch Dr.",
+      "city": "Houston",
+      "phone": 1234567890,
+      "DOB": "2013-06-15"
+    },
+    {
+      "id": "1723066353637",
+      "firstName": "Newer ",
+      "lastName": "Guy",
+      "email": "newer@me.com",
+      "password": "e",
+      "role": "3",
+      "permissions": "basic",
+      "address": "",
+      "city": "",
+      "phone": 0,
+      "DOB": "06/15/2013"
+    }
   ],
   "roles": [
     {

@@ -11,6 +11,7 @@ import { UserService } from '../../services/user.service';
   styleUrl: './employees.component.css'
 })
 export class EmployeesComponent{
+  id: number = 0;
   users$: Observable<User[]>
   creatingUser: boolean = false;
   editingUser: boolean = false;
@@ -25,14 +26,19 @@ export class EmployeesComponent{
     this.isEmailTaken(this.newUser.email).subscribe(emailTaken => {
       if (form.valid && !emailTaken) {
         const newUserCopy = { ...this.newUser };
-        this.userService.addUser(newUserCopy)
-        this.newUser = this.getEmptyUser();
-        this.users$ = this.userService.getUsers();
-
-        this.creatingUser = false;
-        this.users$.subscribe(users => {
-          console.log('Current list of users:', users);
-        });
+        this.userService.addUser(newUserCopy).subscribe(
+          () => {
+            console.log('User added successfully');
+            this.newUser = this.getEmptyUser();
+            this.users$.subscribe(users => {
+              console.log('Current list of users:', users);
+            });
+            this.creatingUser = false;
+          },
+          (error) => {
+            console.error('Error adding user:', error);
+          }
+        )
       } else if(emailTaken){
         console.log('Email is taken!');
         alert('This email is already in use!')
@@ -110,14 +116,15 @@ export class EmployeesComponent{
   }
 
   getEmptyUser(): User {
+    this.id = Date.now()
     return {
-      id: 0,
+      id: this.id.toString(),
       firstName: '',
       lastName: '',
       email: '',
       password: '',
-      role: 0,
-      permissions: [],
+      role: '',
+      permissions: '',
       address: '',
       city: '',
       phone: 0,

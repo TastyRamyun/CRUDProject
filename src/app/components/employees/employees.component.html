@@ -53,8 +53,9 @@
                     <label>Permissions: *</label>
                     <select id="permissions" name="permissions" [(ngModel)]="newUser.permissions"required>
                       <option>Select an option</option>
-                      <option value="Admin">Admin</option>
-                      <option value="Associate">Associate</option>
+                      <option value="admin">Admin</option>
+                      <option value="manager">Associate</option>
+                      <option value="basic">Basic</option>
                     </select>
                   </div>
                   <div class="form-group">
@@ -93,14 +94,20 @@
                   </div>
                   <div class="form-group">
                     <label>Role: *</label>
-                    <input id="role" name="role"type="text" placeholder="CEO" [(ngModel)]="newUser.role" required>
+                    <select id="role" name="role" [(ngModel)]="newUser.role"required>
+                      <option>Select an option</option>
+                      <option value= 1 >CEO</option>
+                      <option value= 2 >Manager</option>
+                      <option value= 3 >Intern</option>
+                    </select>
                   </div>
                   <div class="form-group">
                     <label>Permissions: *</label>
                     <select id="permissions" name="permissions" [(ngModel)]="newUser.permissions"required>
                       <option>Select an option</option>
-                      <option value="Admin">Admin</option>
-                      <option value="Associate">Associate</option>
+                      <option value="admin">Admin</option>
+                      <option value="associate">Associate</option>
+                      <option value="basic">Basic</option>
                     </select>
                   </div>
                   <div class="form-group">

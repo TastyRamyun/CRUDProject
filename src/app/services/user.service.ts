@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable, Subscription, catchError, map, of, tap } from 'rxjs';
+import { Observable, catchError, map, of, tap } from 'rxjs';
 import { User } from '../models/user.model';
 import { BackendService } from './backend.service';
 
@@ -8,15 +8,16 @@ import { BackendService } from './backend.service';
   providedIn: 'root'
 })
 export class UserService {
-  private users: User[] = [];
-  private currUser: User = {
-      id: 0,
+  id: number = 0
+  users: User[] = [];
+  currUser: User = {
+      id: this.id.toString(),
       email: '',
       password:'', 
       firstName: '', 
       lastName: '', 
-      role: 0, 
-      permissions: [], 
+      role: '', 
+      permissions: '', 
       address: '', 
       city: '', 
       phone: 0, 
@@ -48,14 +49,15 @@ export class UserService {
     if (user) {
       this.currUser = user;
     } else {
+      this.id = Date.now()
       this.currUser = {
-        id:0,
+        id: this.id.toString() ,
         email: '',
         password: '', 
         firstName: '', 
         lastName: '', 
-        role: 0, 
-        permissions: [], 
+        role: '', 
+        permissions:'', 
         address: '', 
         city: '', 
         phone: 0, 
@@ -68,7 +70,6 @@ export class UserService {
     return this.currUser
   }
 
-  // Update user
   updateUser(updatedUser: User): void {
     const index = this.users.findIndex(user => user === updatedUser);
     if (index !== -1) {
@@ -77,19 +78,11 @@ export class UserService {
     }
   }
 
-  // Delete user
   deleteUser(user: User) {
     return this.backendService.deleteUser(user);
   }
 
-  // New User
-  addUser(user: User): Observable<User> {
+  addUser(user: User) {
     return this.backendService.addUser(user)
   }
-
-  numberUsers(): number{
-    this.getUsers();
-    return this.users.length
-  }
-
 }
