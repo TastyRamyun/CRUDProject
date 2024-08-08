@@ -14,12 +14,12 @@ import { map, Observable } from 'rxjs';
 export class ProfileComponent {
   newUser: User = this.userService.getEmptyUser();
   users$: Observable<User[]>
-
-  constructor(private router: Router,private userService: UserService){
-    this.users$ = this.userService.getUsers();
-  }
   user: User = this.userService.getCurrUser();
   isEditing: boolean = false;
+
+  constructor(public router: Router,private userService: UserService){
+    this.users$ = this.userService.getUsers();
+  }
 
   updateUser(form: NgForm){
     this.isEmailTaken(this.newUser.email).subscribe(emailTaken => {
@@ -66,6 +66,11 @@ export class ProfileComponent {
 
   exitEdit(){
     this.isEditing = false;
+  }
+  
+  logout(){
+    this.router.navigate(['/login']);
+    this.userService.setCurrUser('');
   }
 
 }

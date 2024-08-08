@@ -4,6 +4,13 @@
         <div class="card">
           <div class="card-header">
             <h1 class="card-title">My Profile</h1>
+            <nav class="toolbar">
+              <ul class="toolbar-links">
+                <li><a (click)="this.router.navigate(['/dash'])">Dashboard</a></li>
+                <li><a (click)="this.router.navigate(['/employees'])">Employees</a></li>
+                <li><a (click)="logout()">Logout</a></li>
+              </ul>
+            </nav>
           </div>
           <div class="card-body">
             <div class="row">
@@ -41,7 +48,7 @@
                   <button (click)="exitEdit()" class="btn btn-danger">Exit</button>
                 </form>
               </div>
-              <div *ngIf="!isEditing" class="actions">
+              <div class="col-md-6" *ngIf="!isEditing">
                 <div class="viewing">
                   <ul>
                     <li class="profileData"><b>First Name:</b> {{this.user.firstName}} </li>
@@ -57,7 +64,6 @@
                   </ul>
                 </div>
                 <button class="btn btn-primary" (click)="editProfile()">Edit Profile</button>
-                <button class="btn btn-danger" (click)="toDashboard()">Exit</button>
               </div>
             </div>
           </div>

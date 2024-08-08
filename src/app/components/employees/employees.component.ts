@@ -23,7 +23,7 @@ export class EmployeesComponent{
   searchTerm: string = '';
   sortDirection: string = '';
   
-  constructor(private userService: UserService,private router: Router){
+  constructor(private userService: UserService,public router: Router){
     this.users$ = this.userService.getUsers();
     this.users$.subscribe(users => {
       this.users = users;
@@ -58,10 +58,6 @@ export class EmployeesComponent{
         alert('Please fill in all fields labled with an asterisk');
       }
     })
-  }
-
-  toDash(){
-    this.router.navigate(['/dash']);
   }
 
   toNewUser(){
@@ -149,14 +145,6 @@ export class EmployeesComponent{
     );
   }
 
-  onSearch(){
-    this.filterAndSortUsers();
-  }
-
-  onSort() {
-    this.filterAndSortUsers();
-  }
-
   filterAndSortUsers() {
     let filtered = this.users;
 
@@ -182,6 +170,11 @@ export class EmployeesComponent{
   inspectUser(user: User){
     this.inspectingUser = true
     this.user = user
+  }
+
+  logout(){
+    this.router.navigate(['/login']);
+    this.userService.setCurrUser('');
   }
     
 }

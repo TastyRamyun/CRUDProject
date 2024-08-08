@@ -28,3 +28,43 @@ button[type="submit"]:hover {
 button{
   margin-right: 10px;
 }
+
+/* Toolbar Styles */
+.toolbar {
+  padding: 10px 20px;
+  display: flex;
+  justify-content: flex-end; /* Aligns the links to the right */
+}
+
+.toolbar-links {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  gap: 15px;
+}
+
+.toolbar-links li {
+  display: inline;
+  justify-content: flex-end; /* Aligns the links to the right */
+}
+
+.toolbar-links a {
+  justify-content: flex-end; /* Aligns the links to the right */
+  text-decoration: none;
+  font-size: 1rem;
+  padding: 5px 10px;
+  border-radius: 4px;
+}
+
+.toolbar-links a:hover {
+  cursor: pointer;
+  color: #007bff;
+}
+
+.card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* Pushes the header title and toolbar to opposite ends */
+  padding: 10px 20px;
+}

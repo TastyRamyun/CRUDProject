@@ -7,12 +7,19 @@
         <div class="card" >
           <div class="card-header" >
             <h1 class="card-title">Employees</h1>
+            <nav class="toolbar">
+              <ul class="toolbar-links">
+                <li><a (click)="this.router.navigate(['/dash'])">Dashboard</a></li>
+                <li><a (click)="this.router.navigate(['/profile'])">My Profile</a></li>
+                <li><a (click)="logout()">Logout</a></li>
+              </ul>
+            </nav>
           </div>
           <div class="card-body">
             <div class="row">
               <div class="toolbar" *ngIf="!editingUser && !creatingUser && !inspectingUser">
-                <input type="text" placeholder="Search by name..." [(ngModel)]="searchTerm" (ngModelChange)="onSearch()">
-                <select [(ngModel)]="sortDirection" (ngModelChange)="onSort()">
+                <input type="text" placeholder="Search by name..." [(ngModel)]="searchTerm" (ngModelChange)="filterAndSortUsers()">
+                <select [(ngModel)]="sortDirection" (ngModelChange)="filterAndSortUsers()">
                   <option value="">Sort By</option>
                   <option value="asc">Name: A to Z</option>
                   <option value="desc">Name: Z to A</option>
@@ -35,8 +42,7 @@
                         </div>
                     </li>
                   </ul>
-                  <button (click)="toNewUser()" class="btn btn-primary">Add New</button>
-                  <button (click)="toDash()" class="btn btn-danger">Back</button>
+                  <button (click)="toNewUser()" class="btn btn-primary">Add New +</button>
                 </div>
               </div>
               <div class="col-md-14" *ngIf="inspectingUser">
@@ -55,7 +61,7 @@
                   </ul>
                 </div>
                 <button class="btn btn-primary" (click)="toEditUser(user)">Edit Profile</button>
-                <button class="btn btn-primary" (click)="this.inspectingUser = false">Exit</button>
+                <button class="btn btn-primary" (click)="this.inspectingUser = false">Back</button>
                 <button class="btn btn-danger" (click)="deleteUser(user)">Delete User</button>
               </div>
               <div class="col-md-14" *ngIf="editingUser">

@@ -4,16 +4,48 @@
         <div class="card" >
           <div class="card-header" >
             <h1 class="card-title">Welcome, {{user.firstName}}</h1>
+            <nav class="toolbar">
+              <ul class="toolbar-links">
+                <li><a (click)="this.router.navigate(['/employees'])">Employees</a></li>
+                <li><a (click)="this.router.navigate(['/profile'])">My Profile</a></li>
+                <li><a (click)="logout()">Logout</a></li>
+              </ul>
+            </nav>
           </div>
           <div class="card-body">
-            Actions
-            <div class="row">
-              <div class="col-md-6">
-                <button (click)="this.toEmployees()" class="btn btn-primary" *ngIf="this.user.permissions.includes('admin') || this.user.permissions.includes('manager') ">Employees</button>
-                <button (click)="this.toProfile()" class="btn btn-primary">View Profile</button>
-                <button (click)="this.logout()" class="btn btn-danger">Logout</button>
+            <div class="announcement-section">
+              <div class="col-md-6" *ngIf="!creatingAnn">
+                <div class="announcements-window">
+                  <div class="announcement-header">
+                    <h2 class="header-title">Latest Announcements</h2>
+                    <button (click)="creatingAnn = true" class="new-announcement-button" *ngIf="this.user.role === 'CEO'">New Announcement</button>
+                  </div>
+                  <div class="announcements-list">
+                    <div *ngFor="let announcement of announcements" class="announcement-item">
+                      <h4>{{ announcement.title }}</h4> 
+                      <p>{{ announcement.message }}</p>
+                      <small class="announcement-date">{{ announcement.date | date:'short' }}</small>
+                      <button class="delete-btn" (click)="deleteAnn(announcement)">X</button>
+                    </div>
+                  </div>
+                </div>
               </div>
-          </div>
+              <div class="col-md-6" *ngIf="creatingAnn">
+                <h2>Issue Announcement</h2>
+                <form #announcementForm="ngForm" (ngSubmit)="submitAnn(announcementForm)">
+                  <div class="form-group">
+                    <label for="announcementTitle">Title:</label>
+                    <input type="text" id="title" [(ngModel)]="annTitle" name="title" required>
+                  </div>
+                  <div class="form-group">
+                    <label for="announcementBody">Message:</label>
+                    <textarea id="message" [(ngModel)]="annBody" name="message" rows="5" required></textarea>
+                  </div>
+                  <button type="submit" class="btn btn-success">Send Announcement</button>
+                  <button (click)="creatingAnn = false" class="btn btn-danger">Cancel</button>
+                </form>
+              </div>
+            </div>
         </div>
       </div>
     </div>

@@ -1,0 +1,8 @@
+.error-message {
+    color: red; /* Sets the text color to red */
+    font-size: 1rem; /* Adjusts the font size if needed */
+    padding: 10px; /* Adds padding around the message */
+    border: 1px solid red; /* Optional: Adds a border around the message */
+    border-radius: 4px; /* Optional: Rounds the corners of the border */
+    background-color: #fdd; /* Optional: Adds a light red background for better visibility */
+  }

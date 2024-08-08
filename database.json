@@ -79,5 +79,19 @@
       "name": "basic",
       "description": "Basic access permission"
     }
+  ],
+  "announcements": [
+    {
+      "id": "83f3",
+      "title": "Welcome!",
+      "message": "This is ngCRUDMaster's first announcement!",
+      "date": "2024-08-08T18:37:37.579Z"
+    },
+    {
+      "id": "557d",
+      "title": "Hello!",
+      "message": "This is the second announcment!",
+      "date": "2024-08-08T18:42:44.048Z"
+    }
   ]
 }
