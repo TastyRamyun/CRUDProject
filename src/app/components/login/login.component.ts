@@ -20,7 +20,7 @@ export class LoginComponent {
 
   onSubmit(email: string, password: string) {
     this.userService.getUserByEmail(email).subscribe(user => {
-      if (user) {
+      if (user && password) {
         this.invalidLogin = false;
         this.userService.setCurrUser(email);
         this.router.navigate(['/dash']);

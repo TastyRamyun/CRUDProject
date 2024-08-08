@@ -99,3 +99,7 @@ select{
   border-radius: 4px;
   font-size: 16px;
 }
+
+button{
+  margin-right: 10px;
+}
