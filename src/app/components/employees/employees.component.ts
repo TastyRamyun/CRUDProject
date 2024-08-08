@@ -16,6 +16,7 @@ export class EmployeesComponent{
   users$: Observable<User[]>
   creatingUser: boolean = false;
   editingUser: boolean = false;
+  inspectingUser: boolean = false;
   newUser: User = this.userService.getEmptyUser();
   user: User = this.userService.getCurrUser()
   filteredUsers: User[] = [];
@@ -76,7 +77,7 @@ export class EmployeesComponent{
   }
 
   toEditUser(userToEdit: User){
-    console.log(userToEdit)
+    this.inspectingUser = false
     this.user = userToEdit
     this.editingUser = true;
   }
@@ -124,6 +125,7 @@ export class EmployeesComponent{
         this.userService.deleteUser(user).subscribe(
           () => {
             console.log('User deleted successfully');
+            this.inspectingUser = false
             this.users$.subscribe(users => {
               this.users$ = this.userService.getUsers()
               this.users = users;
@@ -175,6 +177,11 @@ export class EmployeesComponent{
     }
 
     this.filteredUsers = filtered;
+  }
+
+  inspectUser(user: User){
+    this.inspectingUser = true
+    this.user = user
   }
     
 }

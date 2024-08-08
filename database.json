@@ -5,7 +5,7 @@
       "email": "ep17@me.com",
       "password": "1",
       "firstName": "Enrique",
-      "lastName": "Rox",
+      "lastName": "Perez",
       "role": "CEO",
       "permissions": "admin",
       "address": "123 Main St",
@@ -27,17 +27,17 @@
       "DOB": "1998-09-18"
     },
     {
-      "id": "1723072636732",
-      "firstName": "Brenda",
-      "lastName": "Perez",
-      "email": "brenda@me.com",
-      "password": "2",
+      "id": "1723078098505",
+      "firstName": "Papi",
+      "lastName": "Chulo",
+      "email": "papi@me.com",
+      "password": "w",
       "role": "3",
       "permissions": "basic",
       "address": "",
       "city": "",
       "phone": 0,
-      "DOB": "09/18/24"
+      "DOB": "01/01/2024"
     }
   ],
   "roles": [

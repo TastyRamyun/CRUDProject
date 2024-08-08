@@ -10,7 +10,7 @@
           </div>
           <div class="card-body">
             <div class="row">
-              <div class="toolbar" *ngIf="!editingUser && !creatingUser">
+              <div class="toolbar" *ngIf="!editingUser && !creatingUser && !inspectingUser">
                 <input type="text" placeholder="Search by name..." [(ngModel)]="searchTerm" (ngModelChange)="onSearch()">
                 <select [(ngModel)]="sortDirection" (ngModelChange)="onSort()">
                   <option value="">Sort By</option>
@@ -18,12 +18,12 @@
                   <option value="desc">Name: Z to A</option>
                 </select>
               </div>
-              <div class="col-md-14" *ngIf="!creatingUser && !editingUser">
+              <div class="col-md-14" *ngIf="!creatingUser && !editingUser && !inspectingUser">
                 <div *ngIf="filteredUsers.length">
                   <ul>
                     <li *ngFor="let user of filteredUsers" class="user-item">
                       <span class="user-info">
-                        {{user.firstName}} {{user.lastName}} 
+                        <a (click)="inspectUser(user)" class="user-link">{{ user.firstName }} {{ user.lastName }}</a>
                       </span>
                         <div class="icons">
                           <i class="fa fa-pencil cursor-pointer icon"
@@ -38,6 +38,25 @@
                   <button (click)="toNewUser()" class="btn btn-primary">Add New</button>
                   <button (click)="toDash()" class="btn btn-danger">Back</button>
                 </div>
+              </div>
+              <div class="col-md-14" *ngIf="inspectingUser">
+                <div class="viewing">
+                  <ul>
+                    <li class="profileData"><b>First Name:</b> {{this.user.firstName}} </li>
+                    <li class="profileData"><b>Last Name:</b> {{this.user.lastName}}</li>
+                    <li class="profileData"><b>Email:</b> {{this.user.email}}</li>
+                    <li class="profileData"><b>Password:</b> {{this.user.password}}</li>
+                    <li class="profileData"><b>Role:</b> {{this.user.role}}</li>
+                    <li class="profileData"><b>Permissions:</b> {{this.user.permissions}}</li>
+                    <li class="profileData"><b>Phone:</b> {{this.user.phone}}</li>
+                    <li class="profileData"><b>Address:</b> {{this.user.address}}</li>
+                    <li class="profileData"><b>City:</b> {{this.user.city}}</li>
+                    <li class="profileData"><b>Date of Birth:</b> {{this.user.DOB}}</li>
+                  </ul>
+                </div>
+                <button class="btn btn-primary" (click)="toEditUser(user)">Edit Profile</button>
+                <button class="btn btn-primary" (click)="this.inspectingUser = false">Exit</button>
+                <button class="btn btn-danger" (click)="deleteUser(user)">Delete User</button>
               </div>
               <div class="col-md-14" *ngIf="editingUser">
                 <form #edittedUserForm="ngForm" (ngSubmit)="saveEdittedUser(edittedUserForm)">
@@ -91,7 +110,7 @@
                   <button (click)="cancelEdit()" class="btn btn-danger">Exit</button>
                 </form>
               </div>
-              <div class="col-md-6" *ngIf="creatingUser">
+              <div class="col-md-14" *ngIf="creatingUser">
                 <form #userForm="ngForm" (ngSubmit)="saveUser(userForm)">
                   <div class="form-group">
                     <label>First Name: *</label>

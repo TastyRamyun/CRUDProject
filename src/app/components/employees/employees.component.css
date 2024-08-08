@@ -103,3 +103,14 @@ select{
 button{
   margin-right: 10px;
 }
+
+.user-link {
+  color: black; /* Default color */
+  text-decoration: none; /* Remove underline */
+}
+
+.user-link:hover {
+  cursor: pointer;
+  color: #007bff;
+  text-decoration: underline; /* Optional: Underline on hover */
+}
