@@ -12,13 +12,17 @@ import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { userReducer } from './states/user.reducer';
 import { UserEffects } from './states/user.effects';
+import { GenericTableComponent } from './components/generic-table/generic-table.component';
+import { Employeesv2Component } from './components/employeesv2/employeesv2.component';
 
 @NgModule({ declarations: [
         AppComponent,
         DashboardComponent,
         LoginComponent,
         ProfileComponent,
-        EmployeesComponent
+        EmployeesComponent,
+        GenericTableComponent,
+        Employeesv2Component
     ],
     bootstrap: [AppComponent], 
     imports: [

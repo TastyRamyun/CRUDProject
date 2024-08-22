@@ -21,6 +21,11 @@ export class DashboardComponent {
   annBody: string = ''
   creatingAnn: boolean = false
   announcements: Announcement[] = []
+  annColumns = [
+    { header: 'Title', field: 'title' },
+    { header: 'Message', field: 'message' },
+    { header: 'Date', field: 'date' },
+  ];
 
   constructor(public router: Router, private userService: UserService,private backendService: BackendService){
     this.loadAnnouncements()

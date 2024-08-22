@@ -8,11 +8,11 @@ export class User{
     permissions: string;
     address?: string;
     city?: string;
-    phone?: number;
+    phone?: string;
     DOB?: string;
 
   
-    constructor(id: string, email: string, password: string, firstName: string,lastName: string, role: string, permissions: string, address?: string, city?: string,phone?: number,DOB?: string) {
+    constructor(id: string, email: string, password: string, firstName: string,lastName: string, role: string, permissions: string, address?: string, city?: string,phone?: string,DOB?: string) {
       this.id = id;
       this.email = email;
       this.password = password;

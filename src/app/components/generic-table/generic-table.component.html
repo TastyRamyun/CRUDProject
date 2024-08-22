@@ -1,0 +1,16 @@
+<table class="table">
+    <thead>
+      <tr>
+        <th *ngFor="let column of columns">{{ column }}</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let row of data">
+        <td *ngFor="let column of columns">{{ row[column.field] }}</td>
+        <td>
+          <i class="fa fa-pencil icon" (click)="edit(row)"></i>
+          <i class="fa fa-trash icon" (click)="delete(row)"></i>
+        </td> <!-- Action buttons -->
+      </tr>
+    </tbody>
+  </table>

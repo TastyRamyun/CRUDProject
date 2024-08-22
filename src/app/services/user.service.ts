@@ -20,7 +20,7 @@ export class UserService {
       permissions: '', 
       address: '', 
       city: '', 
-      phone: 0, 
+      phone: '', 
       DOB: ''
   };
 
@@ -60,7 +60,7 @@ export class UserService {
         permissions:'', 
         address: '', 
         city: '', 
-        phone: 0, 
+        phone: '', 
         DOB: ''
       };
     }
@@ -94,7 +94,7 @@ export class UserService {
       permissions: '',
       address: '',
       city: '',
-      phone: 0,
+      phone: '',
       DOB: ''
     };
   }

@@ -1,16 +1,16 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { map, Observable } from 'rxjs';
 import { User } from '../../models/user.model';
-import { Observable, map } from 'rxjs';
 import { UserService } from '../../services/user.service';
 import { NgForm } from '@angular/forms';
 
 @Component({
-  selector: 'app-employees',
-  templateUrl: './employees.component.html',
-  styleUrl: './employees.component.css'
+  selector: 'app-employeesv2',
+  templateUrl: './employeesv2.component.html',
+  styleUrl: './employeesv2.component.css'
 })
-export class EmployeesComponent{
+export class Employeesv2Component {
   id: number = 0;
   users: User[] = []
   users$: Observable<User[]>
@@ -22,6 +22,17 @@ export class EmployeesComponent{
   filteredUsers: User[] = [];
   searchTerm: string = '';
   sortDirection: string = '';
+  userColumns = [
+    { header: 'First Name', field: 'firstName' },
+    { header: 'Last Name', field: 'lastName' },
+    { header: 'Email', field: 'email' },
+    { header: 'Role',field: 'role'},
+    { header: 'Permissions',field: 'permissions'},
+    { header: 'Address',field: 'address'},
+    { header: 'City',field: 'city'},
+    { header: 'Phone',field: 'phone'},
+    { header: 'Date of Birth',field: 'DOB'},
+  ]
   
   constructor(private userService: UserService,public router: Router){
     this.users$ = this.userService.getUsers();

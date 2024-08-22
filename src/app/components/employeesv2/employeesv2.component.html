@@ -1,0 +1,171 @@
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+  <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-md-14" style="padding-top: 25px">
+          <div class="card" >
+            <div class="card-header" >
+              <h1 class="card-title">Employees</h1>
+              <nav class="toolbar">
+                <ul class="toolbar-links">
+                  <li><a (click)="this.router.navigate(['/dash'])">Dashboard</a></li>
+                  <li><a (click)="this.router.navigate(['/profile'])">My Profile</a></li>
+                  <li><a (click)="logout()">Logout</a></li>
+                </ul>
+              </nav>
+            </div>
+            <div class="card-body">
+              <div class="row">
+                <div class="toolbar" *ngIf="!editingUser && !creatingUser && !inspectingUser">
+                  <input type="text" placeholder="Search by name..." [(ngModel)]="searchTerm" (ngModelChange)="filterAndSortUsers()">
+                  <select [(ngModel)]="sortDirection" (ngModelChange)="filterAndSortUsers()">
+                    <option value="">Sort By</option>
+                    <option value="asc">Name: A to Z</option>
+                    <option value="desc">Name: Z to A</option>
+                  </select>
+                </div>
+                <div class="col-md-14" *ngIf="!creatingUser && !editingUser && !inspectingUser">
+                  <div>
+                    <app-generic-table [data]="users" [columns]="userColumns"
+                    (editEvent)="toEditUser($event)" 
+                    (deleteEvent)="deleteUser($event)">
+
+                    </app-generic-table>
+                    <button (click)="toNewUser()" class="btn btn-primary">Add New +</button>
+                  </div>
+                </div>
+                <div class="col-md-14" *ngIf="inspectingUser">
+                  <div class="viewing">
+                    <ul>
+                      <li class="profileData"><b>First Name:</b> {{this.user.firstName}} </li>
+                      <li class="profileData"><b>Last Name:</b> {{this.user.lastName}}</li>
+                      <li class="profileData"><b>Email:</b> {{this.user.email}}</li>
+                      <li class="profileData"><b>Password:</b> {{this.user.password}}</li>
+                      <li class="profileData"><b>Role:</b> {{this.user.role}}</li>
+                      <li class="profileData"><b>Permissions:</b> {{this.user.permissions}}</li>
+                      <li class="profileData"><b>Phone:</b> {{this.user.phone}}</li>
+                      <li class="profileData"><b>Address:</b> {{this.user.address}}</li>
+                      <li class="profileData"><b>City:</b> {{this.user.city}}</li>
+                      <li class="profileData"><b>Date of Birth:</b> {{this.user.DOB}}</li>
+                    </ul>
+                  </div>
+                  <button class="btn btn-primary" (click)="toEditUser(user)">Edit Profile</button>
+                  <button class="btn btn-primary" (click)="this.inspectingUser = false">Back</button>
+                  <button class="btn btn-danger" (click)="deleteUser(user)">Delete User</button>
+                </div>
+                <div class="col-md-14" *ngIf="editingUser">
+                  <form #edittedUserForm="ngForm" (ngSubmit)="saveEdittedUser(edittedUserForm)">
+                    <div class="form-group">
+                      <label>First Name: *</label>
+                      <input id="firstName" name="firstName" type="text" value={{user.firstName}} [(ngModel)]="user.firstName" required>
+                    </div>
+                    <div class="form-group">
+                      <label>Last Name: *</label>
+                      <input id="lastName" name="lastName" type="text" value={{user.lastName}} [(ngModel)]="user.lastName" required>
+                    </div>
+                    <div class="form-group">
+                      <label>Email: *</label>
+                      <input id="email" name="email" type="text" value={{user.email}} [(ngModel)]="user.email" required>
+                    </div>
+                    <div class="form-group">
+                      <label>Password: *</label>
+                      <input id="password" name="password" type="text" value={{user.password}} [(ngModel)]="user.password" required>
+                    </div>
+                    <div class="form-group">
+                      <label>Role: *</label>
+                      <select id="role" name="role" [(ngModel)]="user.role"required>
+                        <option>Select an option</option>
+                        <option value= "CEO" >CEO</option>
+                        <option value= "Manager" >Manager</option>
+                        <option value= "Intern" >Intern</option>
+                      </select>
+                    </div>
+                    <div class="form-group">
+                      <label>Permissions: *</label>
+                      <select id="permissions" name="permissions" [(ngModel)]="user.permissions"required>
+                        <option>Select an option</option>
+                        <option value="admin">Admin</option>
+                        <option value="manager">Associate</option>
+                        <option value="basic">Basic</option>
+                      </select>
+                    </div>
+                    <div class="form-group">
+                      <label>Address: </label>
+                      <input id="address" name="address" type="text" value={{user.address}} [(ngModel)]="user.address">
+                    </div>
+                    <div class="form-group">
+                      <label>City: </label>
+                      <input id="city" name="city" type="text" value={{user.city}} [(ngModel)]="user.city">
+                    </div>
+                    <div class="form-group">
+                      <label>Phone: </label>
+                      <input id="phone" name="phone" type="number" value={{user.phone}} [(ngModel)]="user.phone">
+                    </div>
+                    <button class="btn btn-primary" type="submit">Submit Changes</button>
+                    <button (click)="cancelEdit()" class="btn btn-danger">Exit</button>
+                  </form>
+                </div>
+                <div class="col-md-14" *ngIf="creatingUser">
+                  <form #userForm="ngForm" (ngSubmit)="saveUser(userForm)">
+                    <div class="form-group">
+                      <label>First Name: *</label>
+                      <input id="firstName" name="firstName" type="text" placeholder="Johnny" [(ngModel)]="newUser.firstName" required>
+                    </div>
+                    <div class="form-group">
+                      <label>Last Name: *</label>
+                      <input id="lastName" name="lastName" type="text" placeholder="Appleseed" [(ngModel)]="newUser.lastName" required>
+                    </div>
+                    <div class="form-group">
+                      <label>Email: *</label>
+                      <input id="email" name="email" type="email" placeholder="JohnnyA@me.com" [(ngModel)]="newUser.email" required>
+                    </div>
+                    <div class="form-group">
+                      <label>Password: *</label>
+                      <input id="password" name="password" type="text" placeholder="password123" [(ngModel)]="newUser.password" required>
+                    </div>
+                    <div class="form-group">
+                      <label>Role: *</label>
+                      <select id="role" name="role" [(ngModel)]="newUser.role"required>
+                        <option>Select an option</option>
+                        <option value= "CEO" >CEO</option>
+                        <option value= "Manager" >Manager</option>
+                        <option value= "Intern" >Intern</option>
+                      </select>
+                    </div>
+                    <div class="form-group">
+                      <label>Permissions: *</label>
+                      <select id="permissions" name="permissions" [(ngModel)]="newUser.permissions"required>
+                        <option>Select an option</option>
+                        <option value="admin">Admin</option>
+                        <option value="associate">Associate</option>
+                        <option value="basic">Basic</option>
+                      </select>
+                    </div>
+                    <div class="form-group">
+                      <label>Date of Birth: *</label>
+                      <input id="DOB" name="DOB" type="text" placeholder="01/01/1999" [(ngModel)]="newUser.DOB" required>
+                    </div>
+                    <div class="form-group">
+                      <label>Address: </label>
+                      <input id="address" name="address" type="text" placeholder="123 Road Dr." [(ngModel)]="newUser.address">
+                    </div>
+                    <div class="form-group">
+                      <label>City: </label>
+                      <input id="city" name="city" type="text" placeholder="Houston" [(ngModel)]="newUser.city">
+                    </div>
+                    <div class="form-group">
+                      <label>Phone: </label>
+                      <input id="phone" name="phone" type="number" placeholder= 8323125753 [(ngModel)]="newUser.phone">
+                    </div>
+                    <button class="btn btn-primary" type="submit">Confirm New Employee</button>
+                    <button (click)="cancelNewUser()" class="btn btn-danger">Cancel</button>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  

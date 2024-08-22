@@ -27,6 +27,7 @@ button[type="submit"]:hover {
 
 button{
   margin-right: 10px;
+  margin-bottom: 5px;
 }
 .announcements-window {
   justify-content: space-between;

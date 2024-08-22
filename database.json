@@ -38,6 +38,45 @@
       "city": "",
       "phone": 0,
       "DOB": "01/01/2024"
+    },
+    {
+      "id": "1724368151089",
+      "firstName": "Guy",
+      "lastName": "New ",
+      "email": "newguy@me.com",
+      "password": "e",
+      "role": "3",
+      "permissions": "basic",
+      "address": "wqd",
+      "city": "wqd",
+      "phone": 1234567890,
+      "DOB": "09/18/24"
+    },
+    {
+      "id": "1724368351764",
+      "firstName": "ad",
+      "lastName": "asd",
+      "email": "asf",
+      "password": "asf",
+      "role": "Intern",
+      "permissions": "admin",
+      "address": "",
+      "city": "",
+      "phone": 0,
+      "DOB": "asf"
+    },
+    {
+      "id": "1724368374538",
+      "firstName": "asdf",
+      "lastName": "asf",
+      "email": "asfe",
+      "password": "saf",
+      "role": "Intern",
+      "permissions": "basic",
+      "address": "",
+      "city": "",
+      "phone": 0,
+      "DOB": "asf"
     }
   ],
   "roles": [
@@ -88,10 +127,10 @@
       "date": "2024-08-08T18:37:37.579Z"
     },
     {
-      "id": "557d",
-      "title": "Hello!",
-      "message": "This is the second announcment!",
-      "date": "2024-08-08T18:42:44.048Z"
+      "id": "5442",
+      "title": "Table test",
+      "message": "A test for our new generic table.",
+      "date": "2024-08-22T23:20:35.292Z"
     }
   ]
 }

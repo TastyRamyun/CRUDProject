@@ -6,7 +6,7 @@
             <h1 class="card-title">Welcome, {{user.firstName}}</h1>
             <nav class="toolbar">
               <ul class="toolbar-links">
-                <li><a (click)="this.router.navigate(['/employees'])">Employees</a></li>
+                <li><a *ngIf="this.user.permissions !== 'basic'" (click)="this.router.navigate(['/employees'])">Employees</a></li>
                 <li><a (click)="this.router.navigate(['/profile'])">My Profile</a></li>
                 <li><a (click)="logout()">Logout</a></li>
               </ul>
@@ -46,6 +46,10 @@
                 </form>
               </div>
             </div>
+            <app-generic-table 
+              [data]="announcements" 
+              [columns]="annColumns"
+            ></app-generic-table>
         </div>
       </div>
     </div>

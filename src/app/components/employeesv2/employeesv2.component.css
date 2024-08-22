@@ -1,0 +1,156 @@
+.form-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
+}
+.form-group label {
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+.form-group input,
+.form-group select {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+}
+button[type="submit"] {
+  cursor: pointer;
+}
+button[type="submit"]:hover {
+  background-color: #0056b3;
+}
+.cursor-pointer {
+  cursor: pointer;
+}
+.ml-2 {
+  margin-left: 1rem;
+}
+ul li .icon{
+  color: #000; /* Default color */
+  transition: color 0.3s ease; /* Smooth transition for color change */
+}
+ul li .icon:hover {
+  color: #007bff; /* Change to desired hover color */
+  transform: scale(1.1);
+}
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.user-item {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  position: relative; /* For positioning the icons absolutely */
+}
+
+/* Hide the icons by default */
+.icons {
+  display: none;
+  margin-left: auto; /* Push icons to the right */
+}
+
+/* Show icons when hovering over the list item */
+.user-item:hover .icons {
+  display: flex;
+  align-items: center; /* Center the icons vertically */
+}
+
+/* Optional: Additional styling for icons */
+.icons i {
+  color: #000;
+  transition: color 0.3s ease, transform 0.3s ease;
+  font-size: 1.5rem;
+}
+
+.icons i:hover {
+  color: #007bff;
+  transform: scale(1.2);
+}
+
+.toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.toolbar input {
+  flex: 1;
+  margin-right: 10px; /* Optional: Add some space between the input and select */
+  max-width: 300px; /* Set the max width as needed */
+}
+
+.toolbar select {
+  margin-left: auto;
+}
+
+select{
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+.toolbar input{
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+button{
+  margin-right: 10px;
+}
+
+.user-link {
+  color: black; /* Default color */
+  text-decoration: none; /* Remove underline */
+}
+
+.user-link:hover {
+  cursor: pointer;
+  color: #007bff;
+  text-decoration: underline; /* Optional: Underline on hover */
+}
+
+/* Toolbar Styles */
+.toolbar {
+  padding: 10px 20px;
+  display: flex;
+  justify-content: flex-end; /* Aligns the links to the right */
+}
+
+.toolbar-links {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  gap: 15px;
+}
+
+.toolbar-links li {
+  display: inline;
+  justify-content: flex-end; /* Aligns the links to the right */
+}
+
+.toolbar-links a {
+  justify-content: flex-end; /* Aligns the links to the right */
+  text-decoration: none;
+  font-size: 1rem;
+  padding: 5px 10px;
+  border-radius: 4px;
+}
+
+.toolbar-links a:hover {
+  cursor: pointer;
+  color: #007bff;
+}
+
+.card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* Pushes the header title and toolbar to opposite ends */
+  padding: 10px 20px;
+}
